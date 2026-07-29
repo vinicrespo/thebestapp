@@ -5,6 +5,10 @@ import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
   base: '/app/',
+  build: {
+    outDir: '../app',
+    emptyOutDir: true
+  },
   plugins: [
     react(),
     tailwindcss(),
