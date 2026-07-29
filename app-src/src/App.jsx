@@ -7,7 +7,7 @@ import GutHealth from './components/Modules/GutHealth';
 import HormonalShot from './components/Modules/HormonalShot';
 import SkinCare from './components/Modules/SkinCare';
 import BottomNav from './components/Layout/BottomNav';
-import { getProfile, checkDayReset } from './utils/storage';
+import { getProfile } from './utils/storage';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -23,7 +23,6 @@ const App = () => {
       if (profile && profile.age) {
         setHasProfile(true);
       }
-      checkDayReset();
     }
     setLoading(false);
   }, []);

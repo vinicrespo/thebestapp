@@ -20,38 +20,36 @@ export const saveProgress = (data) => {
 
 export const getProgress = () => {
   const data = localStorage.getItem(PROGRESS_KEY + getCurrentEmail());
-  return data ? JSON.parse(data) : { currentDay: 1, streak: 0, lastLoginDate: null, bodyLog: [] };
+  return data ? JSON.parse(data) : { 
+    currentDay: 1, 
+    streak: 0, 
+    lastLoginDate: null, 
+    bodyLog: [],
+    completedDays: [], // Array of numbers e.g., [1, 2, 3]
+    dailyHabits: { water: false, steps: false, supplements: false }
+  };
 };
 
-export const checkDayReset = () => {
-  const progress = getProgress();
-  if (!progress.lastLoginDate) return progress;
-  
-  const lastDate = new Date(progress.lastLoginDate);
-  const today = new Date();
-  
-  // If a full day has passed (comparing dates ignoring time)
-  if (lastDate.toDateString() !== today.toDateString()) {
-      progress.currentDay += 1;
-      
-      // Calculate streak
-      const diffTime = Math.abs(today - lastDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      
-      if (diffDays === 1) {
-          progress.streak += 1;
-      } else if (diffDays > 1) {
-          progress.streak = 0; // Lost streak
-      }
-      
-      saveProgress(progress);
-  }
-  return progress;
-};
-
-export const logDailyAction = () => {
+export const toggleDayCompletion = (day) => {
     const progress = getProgress();
-    progress.lastLoginDate = new Date().toISOString();
+    if (progress.completedDays.includes(day)) {
+        progress.completedDays = progress.completedDays.filter(d => d !== day);
+    } else {
+        progress.completedDays.push(day);
+        
+        // Update streak if it's the highest day they've done today
+        progress.lastLoginDate = new Date().toISOString();
+        if (progress.completedDays.length > progress.streak) {
+            progress.streak = progress.completedDays.length;
+        }
+    }
+    saveProgress(progress);
+    return progress;
+};
+
+export const saveDailyHabits = (habits) => {
+    const progress = getProgress();
+    progress.dailyHabits = habits;
     saveProgress(progress);
 };
 
