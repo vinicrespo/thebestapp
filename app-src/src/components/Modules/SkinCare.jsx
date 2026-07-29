@@ -114,21 +114,6 @@ const SkinCare = () => {
         </div>
       </div>
 
-      {/* VIP Community */}
-      <div className="bg-gray-900 rounded-2xl p-6 text-center shadow-lg relative overflow-hidden">
-        <MessageCircle className="text-orange-500 mx-auto mb-3" size={32} />
-        <h3 className="font-bold text-white text-xl mb-2">VIP Support Group</h3>
-        <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-          Connect with women who have successfully reversed skin sagging and share daily tips.
-        </p>
-        <div className="bg-gray-800 p-4 rounded-xl mb-4 border border-gray-700">
-          <p className="text-xs text-orange-400 font-bold mb-1">Status: Waitlist</p>
-          <p className="text-[10px] text-gray-500">The current group is full. Enter your email to be notified of the next opening.</p>
-        </div>
-        <button className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-sm hover:bg-orange-600 transition-colors">
-          Join the Waitlist
-        </button>
-      </div>
     </div>
   );
 };
