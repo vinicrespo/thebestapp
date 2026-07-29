@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Super Discount</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -20,21 +21,182 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             min-height: 100vh;
         }
-        .offer-image {
-            width: 100%;
-            height: auto;
-            display: block;
+        .offer-header {
+            background-color: #f23131;
+            color: #ffffff;
+            padding: 30px 20px;
+            text-transform: uppercase;
         }
+        .offer-header h1 {
+            margin: 0;
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        .offer-header h1 span.underline {
+            text-decoration: underline;
+            text-underline-offset: 8px;
+            text-decoration-thickness: 4px;
+        }
+        
+        .products-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 40px 20px;
+        }
+        
+        .product-box {
+            width: 110px;
+            height: 110px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 4px;
+        }
+        
+        .box-1 {
+            background-color: #000;
+            background-image: linear-gradient(to top, #ff6600 0%, #000 30%);
+            border: 2px solid #000;
+        }
+        .box-1 .title-7x {
+            color: #ffb833;
+            font-size: 36px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 2px;
+        }
+        .box-1 .subtitle-7x {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .box-2 {
+            background-color: #431f6e;
+        }
+        .box-2 img {
+            width: 40px;
+            margin-bottom: 5px;
+        }
+        .box-2 .title-shot {
+            font-size: 11px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .box-3 {
+            background-color: #daaa87;
+        }
+        .box-3 .title-skin {
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 1.1;
+            font-family: serif;
+        }
+        .box-3 .subtitle-skin {
+            font-size: 9px;
+            font-weight: 700;
+            margin-top: 5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .plus-sign {
+            font-size: 60px;
+            font-weight: 900;
+            color: #111;
+            line-height: 1;
+            text-shadow: 3px 3px 0px #fff, 4px 4px 0px #ccc;
+        }
+        
+        .offer-text {
+            padding: 0 30px;
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.3;
+            color: #111;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+        
+        .text-red { color: #bc3636; }
+        .text-purple { color: #4b2b73; }
+        .text-tan { color: #b78762; }
+        .text-blue { color: #214dbf; }
+        .text-green { color: #169324; }
+
         .button-wrapper {
             margin-top: 20px;
             padding: 0 20px;
+        }
+        
+        @media(max-width: 480px) {
+            .offer-header h1 { font-size: 26px; }
+            .offer-text { font-size: 18px; padding: 0 15px; }
+            .products-row { gap: 8px; padding: 30px 10px; }
+            .product-box { width: 90px; height: 90px; }
+            .box-1 .title-7x { font-size: 28px; }
+            .box-1 .subtitle-7x { font-size: 8px; }
+            .plus-sign { font-size: 45px; }
+            .box-2 img { width: 30px; }
+            .box-2 .title-shot { font-size: 9px; }
+            .box-3 .title-skin { font-size: 13px; }
+            .box-3 .subtitle-skin { font-size: 7px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- IMPORTANT: The user needs to save the image as "oferta.jpg" inside the /up4 folder -->
-        <img src="oferta.jpg" alt="Super Discount Offer" class="offer-image">
+        
+        <div class="offer-header">
+            <h1>YOU HAVE BEEN<br>SELECTED FOR<br><span class="underline">A SUPER DISCOUNT</span></h1>
+        </div>
+        
+        <div class="products-row">
+            <div class="product-box box-1">
+                <div class="title-7x">7X</div>
+                <div class="subtitle-7x">ACCELERATOR</div>
+            </div>
+            
+            <div class="plus-sign">+</div>
+            
+            <div class="product-box box-2">
+                <!-- Simple pure CSS/SVG glass with leaves icon -->
+                <svg width="40" height="40" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 5px;">
+                    <path d="M25 30 L35 90 C36 95 64 95 65 90 L75 30 Z" stroke="white" stroke-width="4" fill="transparent"/>
+                    <path d="M30 45 L70 45" stroke="white" stroke-width="4"/>
+                    <path d="M60 30 C75 15 90 20 90 35 C75 35 60 40 60 30" fill="white"/>
+                    <path d="M70 20 C65 5 50 10 50 25 C65 25 75 20 70 20" fill="white"/>
+                </svg>
+                <div class="title-shot">Shot<br>Hormonal<br>App</div>
+            </div>
+            
+            <div class="plus-sign">+</div>
+            
+            <div class="product-box box-3">
+                <div class="title-skin">Anti-<br>Sagging<br>Skin</div>
+                <div class="subtitle-skin">METHOD</div>
+            </div>
+        </div>
+        
+        <div class="offer-text">
+            GET THE COMBO OF THE<br>
+            <span class="text-red">7X ACELERADOR,</span><br>
+            <span class="text-purple">SHOT HORMONAL</span> AND<br>
+            <span class="text-tan">ANTI-SAGGING SKIN METHOD</span><br>
+            RIGHT NOW, PLUS A<br>
+            <span class="text-blue">360-DAY</span> EXTENDED<br>
+            GUARANTEE FOR JUST <span class="text-green">$15</span>
+        </div>
         
         <div class="button-wrapper">
             <!-- BOTÕES DE COMPRA E RECUSA (REMOVIDOS PARA INSERIR OS SEUS AQUI) -->
