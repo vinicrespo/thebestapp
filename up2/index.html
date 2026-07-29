@@ -201,26 +201,21 @@ a{text-decoration-thickness:1px!important;text-underline-offset:.1em}:where(.wp-
     <div class="video-container">
       
 <!-- ESPAÇO PARA A VSL - COLE O SEU EMBED AQUI -->
-<div id="vsl-placeholder" style="width: 100%; max-width: 400px; margin: 0 auto; padding-top: 125%; background-color: #000; position: relative; border-radius: 8px;">
-    <!-- INSIRA SEU IFRAME / SCRIPT AQUI -->
-</div>
+<vturb-smartplayer id="vid-6a6a12ae25b1229f3890147d" style="display: block; margin: 0 auto; width: 100%; max-width: 400px;"><div class="vturb-player-placeholder" style="position: relative; width: 100%; padding: 125.27777777777777% 0 0; z-index: 0; background-color: black;"></div></vturb-smartplayer> <script type="text/javascript"> var s=document.createElement("script"); s.src="https://scripts.converteai.net/d21a9e1d-910e-4254-b2bc-30b12586d2ef/players/6a6a12ae25b1229f3890147d/v4/player.js", s.async=!0,document.head.appendChild(s); </script>
 <!-- FIM DO ESPAÇO PARA A VSL -->
 
     </div>
 
-    <!-- BOTÃO CTA COM DELAY 03:53 = 233000ms -->
-    <div id="cta-block" style="display:none; margin-top: 28px; text-align: center;">
+    <!-- BOTÃO CTA COM DELAY -->
+    <div id="cta-block" class="hide up2" style="margin-top: 28px; text-align: center;">
       
-<!-- BOTÕES DE COMPRA E RECUSA (REMOVIDOS PARA INSERIR OS SEUS AQUI) -->
-
-
+<!-- BOTÕES DE COMPRA E RECUSA -->
+<button type="button" onclick="acceptUpsell('https://app.kashpay.com.br/u/3b5d7068be7935fa')" style="font-family: 'Poppins'; font-size: 18px; font-weight: 600; line-height: 1.3; color: #ffffff; background-color: #057932; border: none; border-radius: 10px; padding: 13px 7%; cursor: pointer; text-align: center; display: block; margin: auto;">Get Now</button>
+<a href="/up3" style="font-family: 'Poppins'; font-size: 14px; font-weight: 400; color: #888888; text-decoration: underline; display: block; margin-top: 15px; cursor: pointer; text-align: center;">No, thanks!</a>
   </div>
 
   <script>
-    // Delay de 4 minutos e 24 segundos = 264000ms
-    setTimeout(function () {
-      document.getElementById('cta-block').style.display = 'block';
-    }, 264000);
+    // Delay is now handled by Vturb script via class 'up2'
   </script>
 </body>
 </html>				</div>
