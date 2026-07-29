@@ -20,7 +20,14 @@ export const saveProgress = (data) => {
 
 export const getProgress = () => {
   const data = localStorage.getItem(PROGRESS_KEY + getCurrentEmail());
-  return data ? JSON.parse(data) : { 
+  if (data) {
+      const parsed = JSON.parse(data);
+      // Ensure new fields exist for returning users
+      if (!parsed.completedDays) parsed.completedDays = [];
+      if (!parsed.dailyHabits) parsed.dailyHabits = { water: false, steps: false, supplements: false };
+      return parsed;
+  }
+  return { 
     currentDay: 1, 
     streak: 0, 
     lastLoginDate: null, 
