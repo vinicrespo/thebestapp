@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #2E7D32;
+  --color-background: #FAFAFA;
+  --color-accent: #FFD700;
+  --font-family-inter: 'Inter', sans-serif;
+}
+
+body {
+  background-color: var(--color-background);
+  font-family: var(--font-family-inter);
+  color: #1A1A1A;
+}
+
+/* Custom Scrollbar for mobile feel */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
