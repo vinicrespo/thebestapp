@@ -1,21 +1,25 @@
-const PROFILE_KEY = 'alkalean_profile';
-const PROGRESS_KEY = 'alkalean_progress';
+const PROFILE_KEY = 'alkalean_profile_';
+const PROGRESS_KEY = 'alkalean_progress_';
+
+const getCurrentEmail = () => {
+    return localStorage.getItem('alkalean_email') || 'default';
+};
 
 export const saveProfile = (data) => {
-  localStorage.setItem(PROFILE_KEY, JSON.stringify(data));
+  localStorage.setItem(PROFILE_KEY + getCurrentEmail(), JSON.stringify(data));
 };
 
 export const getProfile = () => {
-  const data = localStorage.getItem(PROFILE_KEY);
+  const data = localStorage.getItem(PROFILE_KEY + getCurrentEmail());
   return data ? JSON.parse(data) : null;
 };
 
 export const saveProgress = (data) => {
-  localStorage.setItem(PROGRESS_KEY, JSON.stringify(data));
+  localStorage.setItem(PROGRESS_KEY + getCurrentEmail(), JSON.stringify(data));
 };
 
 export const getProgress = () => {
-  const data = localStorage.getItem(PROGRESS_KEY);
+  const data = localStorage.getItem(PROGRESS_KEY + getCurrentEmail());
   return data ? JSON.parse(data) : { currentDay: 1, streak: 0, lastLoginDate: null, bodyLog: [] };
 };
 
@@ -40,7 +44,6 @@ export const checkDayReset = () => {
           progress.streak = 0; // Lost streak
       }
       
-      // Only increment day, do not update lastLoginDate until user explicitly logs an action
       saveProgress(progress);
   }
   return progress;

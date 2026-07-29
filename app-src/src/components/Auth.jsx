@@ -31,13 +31,13 @@ const Auth = ({ onLogin }) => {
           onLogin();
         }, 800);
       }
-    }, 1200); // Wait 1.2s per step to feel premium and secure
+    }, 1200);
   };
 
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6">
-        <ShieldCheck className="w-16 h-16 text-green-700 animate-pulse mb-6" />
+        <ShieldCheck className="w-16 h-16 text-purple-900 animate-pulse mb-6" />
         <div className="space-y-4 w-full max-w-xs">
           {loadingSteps.map((text, index) => (
             <div 
@@ -47,9 +47,9 @@ const Auth = ({ onLogin }) => {
               }`}
             >
               {index < loadingStep ? (
-                <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
               ) : index === loadingStep ? (
-                <div className="w-5 h-5 border-2 border-green-500 border-t-transparent rounded-full animate-spin flex-shrink-0" />
+                <div className="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin flex-shrink-0" />
               ) : (
                 <div className="w-5 h-5 flex-shrink-0" />
               )}
@@ -69,11 +69,11 @@ const Auth = ({ onLogin }) => {
         <img 
           src="/app/logo.png" 
           alt="AlkaLean Logo" 
-          className="w-32 h-32 mx-auto mb-6 rounded-full object-cover shadow-md"
+          className="w-32 h-32 mx-auto mb-6 rounded-2xl object-cover shadow-md"
           onError={(e) => { e.target.style.display = 'none'; }}
         />
         <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-        <p className="text-gray-500 text-sm mb-8">Enter your purchase email to access your biological reset.</p>
+        <p className="text-gray-500 text-sm mb-8">Enter your purchase email</p>
         
         <form onSubmit={handleLogin} className="space-y-4">
           <input 
@@ -82,11 +82,11 @@ const Auth = ({ onLogin }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Address"
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-green-600 bg-gray-50"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-900 bg-gray-50"
           />
           <button 
             type="submit"
-            className="w-full bg-green-700 text-white font-semibold py-3 rounded-lg hover:bg-green-800 transition-colors shadow-lg shadow-green-700/30"
+            className="w-full bg-purple-900 text-white font-semibold py-3 rounded-lg hover:bg-purple-950 transition-colors shadow-lg shadow-purple-900/30"
           >
             Access Vault
           </button>

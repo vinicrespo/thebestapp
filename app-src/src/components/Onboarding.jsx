@@ -58,7 +58,7 @@ const Onboarding = ({ onComplete }) => {
               onChange={(e) => setFormData({...formData, age: e.target.value})}
               placeholder="e.g. 45"
               required
-              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-green-600 outline-none"
+              className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-purple-900 outline-none"
             />
           </div>
           <div className="flex space-x-4">
@@ -70,7 +70,7 @@ const Onboarding = ({ onComplete }) => {
                 onChange={(e) => setFormData({...formData, weight: e.target.value})}
                 placeholder="e.g. 180"
                 required
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-green-600 outline-none"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-purple-900 outline-none"
               />
             </div>
             <div className="flex-1">
@@ -80,7 +80,7 @@ const Onboarding = ({ onComplete }) => {
                 value={formData.goalWeight}
                 onChange={(e) => setFormData({...formData, goalWeight: e.target.value})}
                 placeholder="e.g. 140"
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-green-600 outline-none"
+                className="w-full px-4 py-3 rounded-lg border border-gray-200 bg-gray-50 focus:ring-2 focus:ring-purple-900 outline-none"
               />
             </div>
           </div>
@@ -100,15 +100,15 @@ const Onboarding = ({ onComplete }) => {
                 onClick={() => toggleFlag(item.id)}
                 className={`flex items-center justify-between p-4 rounded-xl border cursor-pointer transition-colors ${
                   formData.healthFlags[item.id] 
-                    ? 'border-green-600 bg-green-50' 
+                    ? 'border-purple-900 bg-purple-50' 
                     : 'border-gray-200 bg-white'
                 }`}
               >
-                <span className={`font-medium ${formData.healthFlags[item.id] ? 'text-green-800' : 'text-gray-700'}`}>
+                <span className={`font-medium ${formData.healthFlags[item.id] ? 'text-purple-900' : 'text-gray-700'}`}>
                   {item.label}
                 </span>
                 <div className={`w-5 h-5 rounded-full border flex items-center justify-center ${
-                  formData.healthFlags[item.id] ? 'bg-green-600 border-green-600' : 'border-gray-300'
+                  formData.healthFlags[item.id] ? 'bg-purple-900 border-purple-900' : 'border-gray-300'
                 }`}>
                   {formData.healthFlags[item.id] && <div className="w-2 h-2 bg-white rounded-full" />}
                 </div>
@@ -119,7 +119,7 @@ const Onboarding = ({ onComplete }) => {
 
         <button 
           type="submit"
-          className="w-full mt-8 bg-gray-900 text-white font-semibold py-4 rounded-xl flex items-center justify-center space-x-2 hover:bg-black transition-colors"
+          className="w-full mt-8 bg-purple-900 text-white font-semibold py-4 rounded-xl flex items-center justify-center space-x-2 hover:bg-purple-950 transition-colors shadow-lg shadow-purple-900/30"
         >
           <span>Generate My Protocol</span>
           <ChevronRight size={20} />

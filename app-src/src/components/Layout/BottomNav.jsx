@@ -20,7 +20,7 @@ const BottomNav = () => {
             to={item.path}
             className={({ isActive }) =>
               `flex flex-col items-center space-y-1 transition-colors ${
-                isActive ? 'text-green-700' : 'text-gray-400 hover:text-gray-600'
+                isActive ? 'text-purple-900' : 'text-gray-400 hover:text-gray-600'
               }`
             }
           >

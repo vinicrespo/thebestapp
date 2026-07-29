@@ -1,33 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { getProgress } from '../../utils/storage';
-import { Lock, Sparkles, Droplets, CheckCircle } from 'lucide-react';
+import React from 'react';
+import { Sparkles, Droplets, CheckCircle, Flame, MessageCircle, AlertCircle } from 'lucide-react';
 
 const SkinCare = () => {
-  const [progress, setProgress] = useState(null);
-  const UNLOCK_DAY = 7;
-
-  useEffect(() => {
-    setProgress(getProgress());
-  }, []);
-
-  if (!progress) return null;
-
-  const isUnlocked = progress.currentDay >= UNLOCK_DAY;
-
-  if (!isUnlocked) {
-    return (
-      <div className="flex flex-col items-center justify-center p-8 mt-20 text-center">
-        <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-          <Lock className="text-gray-400" size={32} />
-        </div>
-        <h2 className="text-xl font-bold text-gray-900 mb-2">Vault Locked</h2>
-        <p className="text-gray-500 text-sm">
-          The Anti-Sagging Skin Method unlocks on Day {UNLOCK_DAY}. Detox must be completed first for visible results.
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="p-6">
       <div className="mb-6 pt-4">
@@ -35,41 +9,72 @@ const SkinCare = () => {
         <p className="text-gray-500 text-sm">Collagen F3 Method</p>
       </div>
 
-      <div className="bg-gradient-to-br from-amber-100 to-orange-50 rounded-2xl p-6 shadow-sm mb-6 border border-amber-200">
-        <Sparkles className="text-amber-600 mb-3" size={28} />
-        <h2 className="font-bold text-amber-900 text-lg mb-2">Why Skin Sags & How to Fix It</h2>
-        <p className="text-sm text-amber-800/80 leading-relaxed">
-          The VSL introduced you to "Collagen F3". Unlike normal collagen, F3 requires high stomach acid to absorb. Your daily AlkaLean shot primes this environment.
+      {/* The F3 Concept */}
+      <div className="bg-gradient-to-br from-orange-100 to-orange-50 rounded-2xl p-6 shadow-sm mb-6 border border-orange-200">
+        <Sparkles className="text-orange-600 mb-3" size={32} />
+        <h2 className="font-bold text-orange-900 text-xl mb-3">Why Skin Sags & The F3 Solution</h2>
+        <p className="text-sm text-orange-800/90 leading-relaxed mb-4">
+          When you lose fat quickly, the skin often stays loose. This causes flabby arms, a loose belly, and sagging chin. Why? Because the body breaks down <strong>Collagen F3 ("Firmness 3")</strong>. 
         </p>
+        <div className="bg-white/60 p-4 rounded-xl border border-orange-200 text-sm text-orange-900">
+          <p className="flex items-start">
+            <AlertCircle size={16} className="mr-2 mt-0.5 flex-shrink-0" />
+            Most creams and pills use the wrong type of collagen. The AlkaLean shot you take daily primes your stomach acid to naturally synthesize F3 internally.
+          </p>
+        </div>
       </div>
 
+      {/* Tightening Tracker */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-6">
-        <h2 className="font-bold text-gray-900 mb-4 flex items-center">
-          <Droplets size={20} className="text-blue-500 mr-2" />
-          Tightening Tracker
+        <h2 className="font-bold text-gray-900 text-lg mb-4 flex items-center">
+          <Droplets size={24} className="text-purple-900 mr-2" />
+          Daily Tightening Tracker
         </h2>
+        <p className="text-sm text-gray-600 mb-6">
+          Check off these three physical actions daily to accelerate skin retraction while the F3 collagen builds.
+        </p>
+
         <div className="space-y-4">
           {[
-            { title: "Morning Cold Rinse", desc: "Closes pores and tightens skin surface." },
-            { title: "Dry Brushing", desc: "Stimulates lymphatic drainage." },
-            { title: "Bone Broth / Collagen Meal", desc: "Delivers the raw building blocks." }
+            { 
+              title: "Morning Cold Rinse", 
+              desc: "Closes pores and instantly triggers vasoconstriction, physically tightening the skin surface.",
+              icon: <Droplets size={20} className="text-blue-500" />
+            },
+            { 
+              title: "Dry Brushing", 
+              desc: "Use a dry bristle brush on your belly and arms before showering to stimulate lymphatic drainage.",
+              icon: <Flame size={20} className="text-orange-500" />
+            },
+            { 
+              title: "F3 Collagen Meal", 
+              desc: "Consume real bone broth or slow-cooked meats to deliver the raw amino acids for F3.",
+              icon: <CheckCircle size={20} className="text-purple-900" />
+            }
           ].map((item, i) => (
-            <div key={i} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
-              <CheckCircle size={20} className="text-gray-300 mt-0.5 flex-shrink-0" />
+            <div key={i} className="flex items-start space-x-4 p-4 bg-gray-50 rounded-xl border border-gray-100 hover:border-purple-200 transition-colors">
+              <div className="mt-1 bg-white p-2 rounded-lg shadow-sm border border-gray-100">
+                {item.icon}
+              </div>
               <div>
-                <h4 className="font-bold text-gray-800 text-sm">{item.title}</h4>
-                <p className="text-xs text-gray-500">{item.desc}</p>
+                <h4 className="font-bold text-gray-900 text-sm mb-1">{item.title}</h4>
+                <p className="text-xs text-gray-600 leading-relaxed">{item.desc}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-gray-900 rounded-2xl p-6 text-center shadow-lg">
-        <h3 className="font-bold text-white mb-2">VIP Support Group</h3>
-        <p className="text-gray-400 text-xs mb-4">Join 10,000+ women sharing their reset results.</p>
-        <button className="w-full bg-white text-gray-900 font-bold py-3 rounded-lg text-sm hover:bg-gray-100 transition-colors">
-          Coming Soon
+      {/* VIP Community */}
+      <div className="bg-purple-900 rounded-2xl p-6 text-center shadow-lg relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-orange-500 rounded-full blur-3xl opacity-20 -mr-10 -mt-10"></div>
+        <MessageCircle className="text-orange-500 mx-auto mb-3" size={32} />
+        <h3 className="font-bold text-white text-xl mb-2">VIP Women's Support</h3>
+        <p className="text-purple-200 text-sm mb-6 leading-relaxed">
+          Join 10,000+ women sharing their reset results, recipes, and daily victories.
+        </p>
+        <button className="w-full bg-orange-500 text-white font-bold py-4 rounded-xl text-sm hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/30">
+          Access the Community
         </button>
       </div>
     </div>
