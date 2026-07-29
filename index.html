@@ -137,209 +137,7 @@
 					}
 				</style>
 
-				<!-- QUIZ -->
-				<div class="esconder">
-
-
-
-					<div class="row align-items-center justify-content-center mb-3 mt-3 body-quiz pt-3">
-						<div class="wrap esconder quiz-wrapper" id="quiz-wrapper">
-							<div class="container">
-								<div class="brand">
-									<div class="brand-logo">
-										<span class="brand-lean">Alka</span>
-										<span class="brand-peak">Slim</span>
-									</div>
-									<span class="brand-sub">Build your personalized formula</span>
-								</div>
-
-								<div class="progress-wrap">
-									<div class="progress-label">
-										<span id="step-label">Step 1 of 5</span>
-										<span id="pct-label">20%</span>
-									</div>
-									<div class="progress-bar-bg">
-										<div class="progress-bar-fill" id="progress-fill" style="width:20%"></div>
-									</div>
-								</div>
-
-							</div>
-
-							<div class="card2" id="perguntas">
-
-								<!-- STEP 1: Goals (multi-select) -->
-								<div class="step active" id="step-1">
-									<div class="step-eyebrow">Step 1 — Your Goals</div>
-									<div class="step-question">What are your main goals right now?</div>
-									<div class="step-hint">Select all that apply — then hit Continue.</div>
-									<div class="options">
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">🔥</span><span class="opt-label">Faster fat
-												burning</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">🍽️</span><span class="opt-label">Control appetite &
-												cravings</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">😌</span><span class="opt-label">Reduce
-												bloating</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">⚡</span><span class="opt-label">More daily
-												energy</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">✨</span><span class="opt-label">Younger-looking
-												skin</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,1)"><span class="opt-icon">🧠</span><span class="opt-label">Better focus &
-												mood</span></button>
-									</div>
-									<div class="btn-row no-back">
-										<button class="next-btn" id="next-1" onclick="goNext(2)">Continue →</button>
-									</div>
-								</div>
-
-								<!-- STEP 2: Age (single → auto-advance) -->
-								<div class="step" id="step-2">
-									<div class="step-eyebrow">Step 2 — About You</div>
-									<div class="step-question">What is your age range?</div>
-									<div class="step-hint">This helps us calibrate your formula.</div>
-									<div class="options cols-2">
-										<button class="option-btn" onclick="autoAdvance(this,2,'age','18–24',3)"><span class="opt-label">18 – 24 years</span></button>
-										<button class="option-btn" onclick="autoAdvance(this,2,'age','25–34',3)"><span class="opt-label">25 – 34 years</span></button>
-										<button class="option-btn" onclick="autoAdvance(this,2,'age','35–44',3)"><span class="opt-label">35 – 44 years</span></button>
-										<button class="option-btn" onclick="autoAdvance(this,2,'age','45–54',3)"><span class="opt-label">45 – 54 years</span></button>
-										<button class="option-btn full" onclick="autoAdvance(this,2,'age','55+',3)"><span class="opt-label">55 years or older</span></button>
-									</div>
-									<div class="btn-row">
-										<button class="back-btn" onclick="goBack(1)">← Back</button>
-									</div>
-								</div>
-
-								<!-- STEP 3: Current Weight (single → auto-advance) -->
-								<div class="step" id="step-3">
-									<div class="step-eyebrow">Step 3 — Your Body</div>
-									<div class="step-question">What is your current weight range?</div>
-									<div class="step-hint">Your formula is calibrated to your body.</div>
-									<div class="options">
-										<button class="option-btn" onclick="autoAdvance(this,3,'currentWeight','Under 140 lbs',4)"><span class="opt-label">Under 140 lbs <span
-													class="opt-sub">Under 63
-													kg</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,3,'currentWeight','140–169 lbs',4)"><span class="opt-label">140–169 lbs <span
-													class="opt-sub">63–76
-													kg</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,3,'currentWeight','170–199 lbs',4)"><span class="opt-label">170–199 lbs <span
-													class="opt-sub">77–90
-													kg</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,3,'currentWeight','200–229 lbs',4)"><span class="opt-label">200–229 lbs <span
-													class="opt-sub">91–103
-													kg</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,3,'currentWeight','230 lbs or more',4)"><span class="opt-label">230 lbs or more <span
-													class="opt-sub">104+
-													kg</span></span></button>
-									</div>
-									<div class="btn-row">
-										<button class="back-btn" onclick="goBack(2)">← Back</button>
-									</div>
-								</div>
-
-								<!-- STEP 4: Weight Loss Goal (single → auto-advance) -->
-								<div class="step" id="step-4">
-									<div class="step-eyebrow">Step 4 — Your Goal</div>
-									<div class="step-question">How much weight would you like to lose?</div>
-									<div class="step-hint">Choose your primary goal.</div>
-									<div class="options cols-2">
-										<button class="option-btn" onclick="autoAdvance(this,4,'weight','1–25 lbs',5)"><span class="opt-icon">🎯</span><span class="opt-label">1–25
-												lbs<span class="opt-sub">Light cut</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,4,'weight','26–50 lbs',5)"><span class="opt-icon">🔥</span><span
-												class="opt-label">26–50 lbs<span class="opt-sub">Moderate loss</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,4,'weight','51–80 lbs',5)"><span class="opt-icon">💎</span><span
-												class="opt-label">51–80 lbs<span class="opt-sub">Significant loss</span></span></button>
-										<button class="option-btn" onclick="autoAdvance(this,4,'weight','80+ lbs',5)"><span class="opt-icon">🚀</span><span class="opt-label">80+
-												lbs<span class="opt-sub">Major
-													transformation</span></span></button>
-									</div>
-									<div class="btn-row">
-										<button class="back-btn" onclick="goBack(3)">← Back</button>
-									</div>
-								</div>
-
-								<!-- STEP 5: Symptoms (multi-select) -->
-								<div class="step" id="step-5">
-									<div class="step-eyebrow">Step 5 — Symptoms</div>
-									<div class="step-question">Which of these do you currently experience?</div>
-									<div class="step-hint">Select all that apply — then hit Continue.</div>
-									<div class="options cols-2">
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">😴</span><span class="opt-label">Fatigue & low
-												energy</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">🫃</span><span class="opt-label">Belly
-												bloating</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">🍫</span><span class="opt-label">Sugar
-												cravings</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">🌡️</span><span class="opt-label">Slow
-												metabolism</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">😟</span><span class="opt-label">Mood
-												swings</span></button>
-										<button class="option-btn multi" onclick="toggleMulti(this,5)"><span class="opt-icon">🔁</span><span class="opt-label">Weight keeps coming
-												back</span></button>
-										<button class="option-btn full multi" onclick="toggleMulti(this,5)"><span class="opt-icon">✅</span><span class="opt-label">None of the
-												above</span></button>
-									</div>
-									<div class="btn-row">
-										<button class="back-btn" onclick="goBack(4)">← Back</button>
-										<button class="next-btn" id="next-5" onclick="showResult()">See My Plan →</button>
-									</div>
-								</div>
-
-
-
-								<!-- LOADING SCREEN -->
-								<div class="step" id="loading">
-									<div class="loading-wrap">
-										<div class="spinner"></div>
-										<div class="loading-text" id="loading-text">Reviewing your profile...</div>
-										<div class="loading-sub">Please wait</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-
-					</div>
-
-					<div class="col-12" style="display:none;">
-
-						<div id="quizStatus" class="quiz-status card2">
-
-							<!-- RESULT -->
-							<div class="step" id="result">
-								<div class="result-badge">✨ Your Plan Is Ready</div>
-								<div class="result-title">You're a perfect match for <span>AlkaSlim!</span></div>
-
-								<div class="profile-card">
-									<div class="profile-card-label">📋 Your Profile Summary</div>
-									<div id="profile-rows"></div>
-								</div>
-
-								<div class="projection-card">
-									<div class="projection-label">📊 Your Estimated Results</div>
-									<div id="projection-content"></div>
-								</div>
-
-								<div class="product-wrap">
-									<img src="https://cdn.wellnesssciencehub.com/AlkaSlim/Kits/6.png" alt="AlkaSlim 6-bottle kit" class="product-img">
-									<div class="product-badge">50% OFF</div>
-								</div>
-
-								<a href="#" class="cta-btn" onclick="showAfterQuiz(); return false;">
-									🛒 Get My AlkaSlim Now
-								</a>
-								<button class="redo-btn" onclick="restartQuiz()">← Redo my profile</button>
-								<div class="cta-sub">🔒 Secure checkout · 60-day money-back guarantee</div>
-							</div>
-						</div>
-
-					</div>
-
-
-				</div>
-				<!-- QUIZ -->
-
-
-				<main id="container">
+<main id="container">
 
 
 
@@ -350,7 +148,7 @@
 
 
 
-						<div class="after-quiz" style="display: none;">
+						<div class="after-quiz vsl">
 
 							<!-- CTA Headline -->
 							<div class="py-3 py-md-5" style="background-color: var(--primary-color);">
@@ -1677,26 +1475,7 @@
 			<!-- Purchase Notifications VBL JS -->
 			<script type="text/javascript" src="https://healthplusinsights.com/alkaslim_bg/vsl01_l7/assets/js/purchase-notifications-vbl.js"></script>
 
-
-
-			<!-- Hide Comments after video -->
-			<script>
-				setInterval(() => {
-					const esconderDiv2 = document.querySelector('.esconder ');
-					const fbComments = document.querySelector('#fb-comments');
-					const footerInit = document.querySelector('#footer-init');
-					if (esconderDiv2 && fbComments) {
-						if (window.getComputedStyle(esconderDiv2).display !== 'none') {
-							fbComments.style.display = 'none';
-							// footerInit.style.display = 'none';
-						}
-					}
-				}, 500);
-			</script>
-
-
-
-			<script>
+<script>
 				$(document).ready(function () {
 					var delaySeconds = 2322;
 					var player = document.querySelector("vturb-smartplayer");
@@ -1753,8 +1532,6 @@
 
 
 			<script src="https://healthplusinsights.com/alkaslim_bg/vsl01_l7/assets/js/utm-transfer.js"></script>
-			<script src="https://healthplusinsights.com/alkaslim_bg/vsl01_l7/assets/js/new-quiz.js?v=4"></script>
-
-	</body>
+</body>
 
 </html>
