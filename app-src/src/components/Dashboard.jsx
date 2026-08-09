@@ -184,27 +184,6 @@ const Dashboard = () => {
 
       {activeTab === 'daily' ? (
         <>
-          {/* Daily Coaching Audio (Visual Placeholder) */}
-          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button className="w-12 h-12 bg-purple-900 text-white rounded-full flex items-center justify-center hover:bg-purple-800 transition-colors shadow-lg shadow-purple-900/20">
-                <Play size={20} className="ml-1" />
-              </button>
-              <div>
-                <p className="text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-0.5">VIP Daily Coaching</p>
-                <p className="text-sm font-bold text-gray-900">Dr. Ania's Morning Note</p>
-              </div>
-            </div>
-            <div className="flex space-x-1">
-              <div className="w-1 h-3 bg-purple-200 rounded-full"></div>
-              <div className="w-1 h-6 bg-purple-400 rounded-full"></div>
-              <div className="w-1 h-4 bg-purple-300 rounded-full"></div>
-              <div className="w-1 h-8 bg-purple-600 rounded-full"></div>
-              <div className="w-1 h-5 bg-purple-300 rounded-full"></div>
-              <div className="w-1 h-3 bg-purple-200 rounded-full"></div>
-            </div>
-          </div>
-
           {renderCalendar()}
           {renderDailyHabits()}
 
