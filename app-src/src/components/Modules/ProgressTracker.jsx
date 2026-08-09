@@ -7,6 +7,7 @@ const ProgressTracker = () => {
   const [currentWeight, setCurrentWeight] = useState('');
   const [weightHistory, setWeightHistory] = useState([]);
   const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [photos, setPhotos] = useState({ day1: null, current: null });
 
   useEffect(() => {
     const prof = getProfile();
@@ -15,14 +16,60 @@ const ProgressTracker = () => {
     // Load weight history
     const history = JSON.parse(localStorage.getItem('alkalean_weight_history') || '[]');
     if (history.length === 0 && prof?.weight) {
-      // Add initial weight if empty
       const initial = { date: new Date().toISOString(), weight: Number(prof.weight) };
       localStorage.setItem('alkalean_weight_history', JSON.stringify([initial]));
       setWeightHistory([initial]);
     } else {
       setWeightHistory(history);
     }
+
+    // Load photos
+    const savedPhotos = JSON.parse(localStorage.getItem('alkalean_photos') || '{"day1":null,"current":null}');
+    setPhotos(savedPhotos);
   }, []);
+
+  const handlePhotoUpload = (e, type) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      const img = new Image();
+      img.onload = () => {
+        // Compress image using canvas
+        const canvas = document.createElement('canvas');
+        const MAX_WIDTH = 600;
+        const MAX_HEIGHT = 800;
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > MAX_WIDTH) {
+            height *= MAX_WIDTH / width;
+            width = MAX_WIDTH;
+          }
+        } else {
+          if (height > MAX_HEIGHT) {
+            width *= MAX_HEIGHT / height;
+            height = MAX_HEIGHT;
+          }
+        }
+        canvas.width = width;
+        canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, width, height);
+        
+        // Convert to base64 jpeg with 0.7 quality
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.7);
+        
+        const newPhotos = { ...photos, [type]: dataUrl };
+        setPhotos(newPhotos);
+        localStorage.setItem('alkalean_photos', JSON.stringify(newPhotos));
+      };
+      img.src = event.target.result;
+    };
+    reader.readAsDataURL(file);
+  };
 
   const handleLogWeight = (e) => {
     e.preventDefault();
@@ -144,14 +191,37 @@ const ProgressTracker = () => {
         </p>
         
         <div className="grid grid-cols-2 gap-3">
-          <div className="aspect-[3/4] bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 transition-colors">
-            <ImageIcon size={24} className="mb-2 opacity-50" />
-            <span className="text-xs font-bold">Add Day 1</span>
-          </div>
-          <div className="aspect-[3/4] bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 transition-colors">
-            <ImageIcon size={24} className="mb-2 opacity-50" />
-            <span className="text-xs font-bold">Add Current</span>
-          </div>
+          {/* Day 1 Photo */}
+          <label className="relative aspect-[3/4] bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 transition-colors overflow-hidden group">
+            <input type="file" accept="image/*" className="hidden" onChange={(e) => handlePhotoUpload(e, 'day1')} />
+            {photos.day1 ? (
+              <>
+                <img src={photos.day1} alt="Day 1" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">Update</div>
+              </>
+            ) : (
+              <>
+                <ImageIcon size={24} className="mb-2 opacity-50" />
+                <span className="text-xs font-bold">Add Day 1</span>
+              </>
+            )}
+          </label>
+
+          {/* Current Photo */}
+          <label className="relative aspect-[3/4] bg-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:bg-gray-50 transition-colors overflow-hidden group">
+            <input type="file" accept="image/*" className="hidden" onChange={(e) => handlePhotoUpload(e, 'current')} />
+            {photos.current ? (
+              <>
+                <img src={photos.current} alt="Current" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">Update</div>
+              </>
+            ) : (
+              <>
+                <ImageIcon size={24} className="mb-2 opacity-50" />
+                <span className="text-xs font-bold">Add Current</span>
+              </>
+            )}
+          </label>
         </div>
       </div>
 
