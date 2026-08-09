@@ -6,6 +6,7 @@ import Dashboard from './components/Dashboard';
 import GutHealth from './components/Modules/GutHealth';
 import HormonalShot from './components/Modules/HormonalShot';
 import SkinCare from './components/Modules/SkinCare';
+import ProgressTracker from './components/Modules/ProgressTracker';
 import BottomNav from './components/Layout/BottomNav';
 import { getProfile } from './utils/storage';
 
@@ -44,6 +45,7 @@ const App = () => {
                 <Route path="/gut" element={<GutHealth />} />
                 <Route path="/hormones" element={<HormonalShot />} />
                 <Route path="/skin" element={<SkinCare />} />
+                <Route path="/progress" element={<ProgressTracker />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </>
             )}

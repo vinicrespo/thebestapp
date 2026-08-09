@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits } from '../utils/storage';
 import { getDailyProtocol } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Play, Lock, Award } from 'lucide-react';
 
 const Dashboard = () => {
   const [profile, setProfile] = useState(null);
@@ -124,9 +124,13 @@ const Dashboard = () => {
         { month: "Months 4-6: Cellular Autophagy", focus: "Deep fat-store release. Start incorporating high-intensity interval training (HIIT) 2x a week." },
         { month: "Months 7-12: The New Baseline", focus: "Your body no longer recognizes its old set-point weight. Maintenance mode requires only 3 days of protocols per week." }
       ].map((item, i) => (
-        <div key={i} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex items-start space-x-4">
-          <div className="bg-orange-100 p-3 rounded-xl text-orange-500 font-bold">M{i+2}</div>
-          <div>
+        <div key={i} className="bg-gray-50 rounded-2xl shadow-sm border border-gray-100 p-5 relative overflow-hidden flex items-start space-x-4">
+          <div className="absolute inset-0 bg-white/60 backdrop-blur-[2px] z-10 flex items-center justify-center flex-col text-gray-500">
+            <Lock size={24} className="mb-2 text-gray-400" />
+            <span className="text-xs font-bold uppercase tracking-wider">Unlocks after 30-Day Reset</span>
+          </div>
+          <div className="bg-orange-100 p-3 rounded-xl text-orange-500 font-bold opacity-30">M{i+2}</div>
+          <div className="opacity-30">
             <h4 className="font-bold text-gray-900 text-sm mb-1">{item.month}</h4>
             <p className="text-xs text-gray-500 leading-relaxed">{item.focus}</p>
           </div>
@@ -137,14 +141,28 @@ const Dashboard = () => {
 
   return (
     <div className="p-6">
-      <div className="flex justify-between items-start mb-6 pt-4">
+      {/* Monthly Updates Banner */}
+      <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-xl p-3 mb-6 text-white text-center shadow-md animate-pulse">
+        <p className="text-xs font-bold uppercase tracking-widest mb-1 opacity-80">System Update</p>
+        <p className="text-sm font-semibold">🗓️ August Update: New Fat-Burning Protocols Added!</p>
+      </div>
+
+      <div className="flex justify-between items-start mb-6">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Good Morning.</h1>
           <p className="text-gray-500">Welcome to your dashboard.</p>
         </div>
-        <div className="flex items-center space-x-1 bg-orange-100 px-3 py-1.5 rounded-full text-orange-600 font-bold text-sm shadow-sm">
-          <Flame size={16} className={progress.streak > 0 ? "text-orange-500 fill-orange-500" : "text-gray-400"} />
-          <span>{progress.streak}</span>
+        <div className="flex flex-col items-end">
+          <div className="flex items-center space-x-1 bg-orange-100 px-3 py-1.5 rounded-full text-orange-600 font-bold text-sm shadow-sm mb-2">
+            <Flame size={16} className={progress.streak > 0 ? "text-orange-500 fill-orange-500" : "text-gray-400"} />
+            <span>{progress.streak}</span>
+          </div>
+          {progress.streak > 3 && (
+            <div className="flex items-center space-x-1 text-[10px] font-bold text-green-600 uppercase">
+              <Award size={12} />
+              <span>Top 12% Consistency!</span>
+            </div>
+          )}
         </div>
       </div>
 
@@ -166,6 +184,27 @@ const Dashboard = () => {
 
       {activeTab === 'daily' ? (
         <>
+          {/* Daily Coaching Audio (Visual Placeholder) */}
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-6 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <button className="w-12 h-12 bg-purple-900 text-white rounded-full flex items-center justify-center hover:bg-purple-800 transition-colors shadow-lg shadow-purple-900/20">
+                <Play size={20} className="ml-1" />
+              </button>
+              <div>
+                <p className="text-[10px] font-bold text-orange-500 uppercase tracking-wider mb-0.5">VIP Daily Coaching</p>
+                <p className="text-sm font-bold text-gray-900">Dr. Ania's Morning Note</p>
+              </div>
+            </div>
+            <div className="flex space-x-1">
+              <div className="w-1 h-3 bg-purple-200 rounded-full"></div>
+              <div className="w-1 h-6 bg-purple-400 rounded-full"></div>
+              <div className="w-1 h-4 bg-purple-300 rounded-full"></div>
+              <div className="w-1 h-8 bg-purple-600 rounded-full"></div>
+              <div className="w-1 h-5 bg-purple-300 rounded-full"></div>
+              <div className="w-1 h-3 bg-purple-200 rounded-full"></div>
+            </div>
+          </div>
+
           {renderCalendar()}
           {renderDailyHabits()}
 

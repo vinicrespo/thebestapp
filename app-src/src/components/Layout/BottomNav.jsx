@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Flame, Sparkles, Droplet } from 'lucide-react';
+import { Home, Flame, Sparkles, Droplet, LineChart } from 'lucide-react';
 
 const BottomNav = () => {
   const navItems = [
     { path: '/', label: 'Home', icon: Home },
+    { path: '/progress', label: 'Progress', icon: LineChart },
     { path: '/gut', label: 'Gut', icon: Flame },
     { path: '/hormones', label: 'Hormones', icon: Droplet },
     { path: '/skin', label: 'Skin', icon: Sparkles },
