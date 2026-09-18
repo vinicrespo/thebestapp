@@ -12,7 +12,7 @@ const BottomNav = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 w-full max-w-md bg-white border-t border-gray-200 px-6 py-3 flex justify-between items-center z-50">
+    <div className="fixed bottom-0 w-full max-w-md bg-white/95 backdrop-blur-md border-t border-gray-100 px-4 py-2.5 flex justify-between items-center z-50">
       {navItems.map((item) => {
         const Icon = item.icon;
         return (
@@ -20,13 +20,21 @@ const BottomNav = () => {
             key={item.path}
             to={item.path}
             className={({ isActive }) =>
-              `flex flex-col items-center space-y-1 transition-colors ${
-                isActive ? 'text-purple-900' : 'text-gray-400 hover:text-gray-600'
+              `flex flex-col items-center space-y-0.5 px-2 py-1 rounded-xl transition-all ${
+                isActive
+                  ? 'text-[#5B8C5A]'
+                  : 'text-gray-400 hover:text-gray-600'
               }`
             }
           >
-            <Icon size={24} strokeWidth={2} />
-            <span className="text-[10px] font-semibold">{item.label}</span>
+            {({ isActive }) => (
+              <>
+                <div className={`p-1.5 rounded-xl transition-all ${isActive ? 'bg-[#E8F0E9]' : ''}`}>
+                  <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                </div>
+                <span className={`text-[9px] font-bold ${isActive ? 'text-[#5B8C5A]' : ''}`}>{item.label}</span>
+              </>
+            )}
           </NavLink>
         );
       })}

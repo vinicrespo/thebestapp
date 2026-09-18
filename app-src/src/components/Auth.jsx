@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CheckCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle, ShieldCheck, Leaf } from 'lucide-react';
 
 const Auth = ({ onLogin }) => {
   const [email, setEmail] = useState('');
@@ -7,10 +7,10 @@ const Auth = ({ onLogin }) => {
   const [loadingStep, setLoadingStep] = useState(0);
 
   const loadingSteps = [
-    "Verifying License Key...",
-    "Downloading Biological Profile...",
-    "Syncing with Hormonal Database...",
-    "Access Granted."
+    "Verifying your access...",
+    "Loading your biological profile...",
+    "Preparing your personalized protocol...",
+    "Everything's ready!"
   ];
 
   const handleLogin = (e) => {
@@ -19,7 +19,7 @@ const Auth = ({ onLogin }) => {
 
     setLoading(true);
     let step = 0;
-    
+
     const interval = setInterval(() => {
       step++;
       if (step < loadingSteps.length) {
@@ -36,24 +36,26 @@ const Auth = ({ onLogin }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-white p-6">
-        <ShieldCheck className="w-16 h-16 text-purple-900 animate-pulse mb-6" />
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#E8F0E9] to-white p-6">
+        <div className="w-16 h-16 bg-[#5B8C5A] rounded-full flex items-center justify-center mb-8 animate-pulse-soft">
+          <Leaf className="text-white" size={28} />
+        </div>
         <div className="space-y-4 w-full max-w-xs">
           {loadingSteps.map((text, index) => (
-            <div 
+            <div
               key={index}
-              className={`flex items-center space-x-3 transition-opacity duration-500 ${
-                index <= loadingStep ? 'opacity-100' : 'opacity-0'
+              className={`flex items-center space-x-3 transition-all duration-500 ${
+                index <= loadingStep ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
               }`}
             >
               {index < loadingStep ? (
-                <CheckCircle className="w-5 h-5 text-orange-500 flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-[#5B8C5A] flex-shrink-0" />
               ) : index === loadingStep ? (
-                <div className="w-5 h-5 border-2 border-orange-500 border-t-transparent rounded-full animate-spin flex-shrink-0" />
+                <div className="w-5 h-5 border-2 border-[#5B8C5A] border-t-transparent rounded-full animate-spin flex-shrink-0" />
               ) : (
                 <div className="w-5 h-5 flex-shrink-0" />
               )}
-              <span className={`text-sm font-medium ${index === loadingStep ? 'text-gray-900' : 'text-gray-500'}`}>
+              <span className={`text-sm font-medium ${index <= loadingStep ? 'text-gray-800' : 'text-gray-400'}`}>
                 {text}
               </span>
             </div>
@@ -64,33 +66,38 @@ const Auth = ({ onLogin }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
-      <div className="w-full max-w-sm bg-white p-8 rounded-2xl shadow-sm border border-gray-100 text-center">
-        <img 
-          src="/app/logo.png" 
-          alt="AlkaLean Logo" 
-          className="w-32 h-32 mx-auto mb-6 rounded-2xl object-cover shadow-md"
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#F5E6D3] via-white to-[#E8F0E9] p-6">
+      <div className="w-full max-w-sm text-center">
+        <img
+          src="/app/logo.png"
+          alt="AlkaLean"
+          className="w-28 h-28 mx-auto mb-6 rounded-3xl object-cover shadow-lg"
           onError={(e) => { e.target.style.display = 'none'; }}
         />
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-        <p className="text-gray-500 text-sm mb-8">Enter your purchase email</p>
-        
+
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">Welcome to AlkaLean</h1>
+        <p className="text-gray-500 text-sm mb-8">Enter the email you used to purchase</p>
+
         <form onSubmit={handleLogin} className="space-y-4">
-          <input 
+          <input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email Address"
+            placeholder="your@email.com"
             required
-            className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-900 bg-gray-50"
+            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#5B8C5A] focus:border-transparent bg-white text-center text-base"
           />
-          <button 
+          <button
             type="submit"
-            className="w-full bg-purple-900 text-white font-semibold py-3 rounded-lg hover:bg-purple-950 transition-colors shadow-lg shadow-purple-900/30"
+            className="w-full bg-[#5B8C5A] text-white font-semibold py-3.5 rounded-xl hover:bg-[#4A7A49] transition-colors shadow-lg shadow-[#5B8C5A]/20"
           >
-            Access Vault
+            Access My Protocol
           </button>
         </form>
+
+        <p className="text-xs text-gray-400 mt-6">
+          Your data stays private on your device
+        </p>
       </div>
     </div>
   );
