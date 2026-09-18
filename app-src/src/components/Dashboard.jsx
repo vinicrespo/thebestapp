@@ -107,6 +107,28 @@ const Dashboard = () => {
         </div>
       </div>
 
+      {/* New Feature Banner */}
+      <button
+        onClick={() => navigate('/extended')}
+        className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 mb-5 text-left relative overflow-hidden border border-gray-800"
+      >
+        <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#5B8C5A] rounded-full blur-3xl opacity-10 -ml-6 -mb-6" />
+        <div className="relative z-10">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="flex items-center space-x-2 mb-1">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">New</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500">Update</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">180-Day Extended Protocol</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat. More updates coming soon.</p>
+            </div>
+            <ArrowRight size={18} className="text-[#D4A574] flex-shrink-0 ml-3" />
+          </div>
+        </div>
+      </button>
+
       {/* Motivational Quote */}
       <div className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-4 mb-5 border border-[#D4A574]/20">
         <p className="text-sm text-gray-700 italic leading-relaxed text-center">"{quote}"</p>
