@@ -107,27 +107,68 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* New Feature Banner */}
-      <button
-        onClick={() => navigate('/extended')}
-        className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 mb-5 text-left relative overflow-hidden border border-gray-800"
-      >
-        <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
-        <div className="absolute bottom-0 left-0 w-24 h-24 bg-[#5B8C5A] rounded-full blur-3xl opacity-10 -ml-6 -mb-6" />
-        <div className="relative z-10">
-          <div className="flex items-center justify-between">
+      {/* Feature Banners */}
+      <div className="space-y-3 mb-5">
+        <button
+          onClick={() => navigate('/extended')}
+          className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 text-left relative overflow-hidden border border-gray-800"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+          <div className="relative z-10 flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-2 mb-1">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">New</span>
-                <span className="text-[9px] font-bold uppercase tracking-widest text-gray-500">Update</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">180 Days</span>
               </div>
-              <h3 className="font-bold text-white text-sm">180-Day Extended Protocol</h3>
-              <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat. More updates coming soon.</p>
+              <h3 className="font-bold text-white text-sm">Extended Protocol</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat.</p>
             </div>
             <ArrowRight size={18} className="text-[#D4A574] flex-shrink-0 ml-3" />
           </div>
+        </button>
+
+        <button
+          onClick={() => navigate('/yearend')}
+          className="w-full bg-gradient-to-r from-red-900 to-green-900 rounded-2xl p-4 text-left relative overflow-hidden border border-red-800"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-red-500 rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <div className="flex items-center space-x-2 mb-1">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-red-300 bg-red-500/20 px-2 py-0.5 rounded-full">Bonus</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-green-300 bg-green-500/20 px-2 py-0.5 rounded-full">Oct-Dec</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">Year-End Finish Line Protocol</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">97 daily missions to close the year as your best self.</p>
+            </div>
+            <ArrowRight size={18} className="text-red-300 flex-shrink-0 ml-3" />
+          </div>
+        </button>
+      </div>
+
+      {/* Weekly Summary */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+        <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
+          <CalendarIcon size={16} className="text-[#5B8C5A] mr-2" /> Weekly Summary
+        </h3>
+        <div className="grid grid-cols-4 gap-2">
+          <div className="text-center p-2 bg-[#E8F0E9] rounded-xl">
+            <p className="text-lg font-black text-[#5B8C5A]">{completedCount}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Days Done</p>
+          </div>
+          <div className="text-center p-2 bg-orange-50 rounded-xl">
+            <p className="text-lg font-black text-orange-600">{progress.streak}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Streak</p>
+          </div>
+          <div className="text-center p-2 bg-blue-50 rounded-xl">
+            <p className="text-lg font-black text-blue-600">{hydration.glasses}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Water</p>
+          </div>
+          <div className="text-center p-2 bg-purple-50 rounded-xl">
+            <p className="text-lg font-black text-purple-600">{(progress.badges || []).length}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Badges</p>
+          </div>
         </div>
-      </button>
+      </div>
 
       {/* Motivational Quote */}
       <div className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-4 mb-5 border border-[#D4A574]/20">

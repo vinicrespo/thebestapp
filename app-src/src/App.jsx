@@ -8,6 +8,7 @@ import HormonalShot from './components/Modules/HormonalShot';
 import SkinCare from './components/Modules/SkinCare';
 import ProgressTracker from './components/Modules/ProgressTracker';
 import ExtendedProtocol from './components/Modules/ExtendedProtocol';
+import YearEndBonus from './components/Modules/YearEndBonus';
 import ShoppingList from './components/Extras/ShoppingList';
 import BonusRecipes from './components/Extras/BonusRecipes';
 import SleepGuide from './components/Extras/SleepGuide';
@@ -66,6 +67,7 @@ const App = () => {
                 <Route path="/skin" element={<SkinCare />} />
                 <Route path="/progress" element={<ProgressTracker />} />
                 <Route path="/extended" element={<ExtendedProtocol />} />
+                <Route path="/yearend" element={<YearEndBonus />} />
                 <Route path="/shopping" element={<ShoppingList />} />
                 <Route path="/recipes" element={<BonusRecipes />} />
                 <Route path="/sleep" element={<SleepGuide />} />

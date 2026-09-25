@@ -1,72 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile } from '../../utils/storage';
 import { getHormonalCalculator } from '../../utils/protocol';
-import { Droplet, Coffee, HeartPulse, Sparkles, ChevronRight, ChevronLeft, Lightbulb } from 'lucide-react';
+import { getHormonalDayContent, HORMONAL_CYCLES, SYMPTOM_CATEGORIES } from '../../utils/hormonalProtocol';
+import { Droplet, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Lightbulb, Check, Activity, BookOpen, UtensilsCrossed, ListChecks } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+const STORAGE_KEY = 'alkalean_hormonal_progress';
+
+const getHormonalProgress = () => {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { return {}; }
+};
+
+const saveHormonalProgress = (data) => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+};
 
 const HormonalShot = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
-  const [activeRecipe, setActiveRecipe] = useState(null);
+  const [selectedDay, setSelectedDay] = useState(1);
+  const [activeSection, setActiveSection] = useState(null);
+  const [completedChecklist, setCompletedChecklist] = useState({});
+  const [symptoms, setSymptoms] = useState({});
+  const [showSymptoms, setShowSymptoms] = useState(false);
+  const [showCycles, setShowCycles] = useState(false);
 
   useEffect(() => {
     setProfile(getProfile());
+    const progress = getHormonalProgress();
+    const today = new Date().toISOString().split('T')[0];
+    if (progress.lastDate === today) {
+      setCompletedChecklist(progress.checklist || {});
+      setSymptoms(progress.symptoms || {});
+      setSelectedDay(progress.day || 1);
+    } else {
+      setCompletedChecklist({});
+      const newDay = Math.min((progress.day || 0) + 1, 45);
+      setSelectedDay(newDay);
+      saveHormonalProgress({ ...progress, day: newDay, lastDate: today, checklist: {} });
+    }
   }, []);
 
-  if (!profile) return null;
+  const toggleCheck = (idx) => {
+    const next = { ...completedChecklist, [idx]: !completedChecklist[idx] };
+    setCompletedChecklist(next);
+    saveHormonalProgress({ ...getHormonalProgress(), checklist: next });
+  };
 
-  const dosageText = getHormonalCalculator(profile.weight, profile.age);
+  const rateSymptom = (id) => {
+    const current = symptoms[id] || 0;
+    const next = { ...symptoms, [id]: current >= 5 ? 0 : current + 1 };
+    setSymptoms(next);
+    saveHormonalProgress({ ...getHormonalProgress(), symptoms: next });
+  };
 
-  const recipes = [
-    {
-      id: 'desire',
-      icon: <HeartPulse size={22} />,
-      title: "Desire Tonic",
-      desc: "A natural aphrodisiac to support libido and relieve dryness.",
-      bg: "bg-pink-50",
-      color: "text-pink-500",
-      border: "border-pink-100",
-      ingredients: ["1/2 tsp Maca powder", "4oz warm almond milk", "Pinch of cinnamon", "Optional: 1/2 tsp honey"],
-      instructions: "Froth the maca and cinnamon into the warm milk. Add honey if desired. Drink 30 minutes before intimacy or as an evening ritual.",
-      tip: "Maca has been used for centuries in Peru to enhance libido and energy. It works by balancing hormones, not just masking symptoms."
-    },
-    {
-      id: 'coffee',
-      icon: <Coffee size={22} />,
-      title: "Bariatric Coffee",
-      desc: "A bedtime drink designed to support metabolism while you sleep.",
-      bg: "bg-amber-50",
-      color: "text-amber-600",
-      border: "border-amber-100",
-      ingredients: ["1 cup decaf coffee", "1 tsp coconut oil", "Dash of turmeric", "Pinch of cinnamon"],
-      instructions: "Blend the coconut oil and spices into hot decaf coffee until frothy. Drink 1 hour before bed.",
-      tip: "MCTs in coconut oil provide slow-burning fuel overnight, while turmeric reduces inflammation that causes belly fat storage."
-    },
-    {
-      id: 'cream',
-      icon: <Droplet size={22} />,
-      title: "Forbidden Youth Cream",
-      desc: "Stimulates collagen to help reduce sagging and wrinkles.",
-      bg: "bg-purple-50",
-      color: "text-purple-500",
-      border: "border-purple-100",
-      ingredients: ["2 tbsp Shea butter", "1 tsp Rosehip oil", "1/4 tsp Vitamin E oil"],
-      instructions: "Melt shea butter slightly in your hands, mix with oils. Apply to face, neck, and any areas of concern every night before bed.",
-      tip: "Rosehip oil is one of the few oils clinically shown to reduce wrinkles. Combined with Vitamin E, it creates a powerful anti-aging duo."
-    },
-    {
-      id: 'cortisol',
-      icon: <Sparkles size={22} />,
-      title: "Cortisol Calmer",
-      desc: "An evening tonic to lower stress hormones that cause belly fat.",
-      bg: "bg-indigo-50",
-      color: "text-indigo-500",
-      border: "border-indigo-100",
-      ingredients: ["1/2 tsp Ashwagandha powder", "1 cup warm milk (any kind)", "1/2 tsp honey", "Pinch of nutmeg"],
-      instructions: "Warm the milk gently (don't boil). Stir in ashwagandha, honey, and nutmeg. Drink 30 minutes before bed.",
-      tip: "Ashwagandha can reduce cortisol levels by up to 30%. High cortisol is the #1 hidden cause of belly fat in women over 40."
-    }
-  ];
+  const content = getHormonalDayContent(selectedDay);
+  const checklistDone = content.checklist.filter((_, i) => completedChecklist[i]).length;
 
   return (
     <div className="p-5 pb-24">
@@ -74,84 +63,195 @@ const HormonalShot = () => {
         <ChevronLeft size={18} /> Back
       </button>
 
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Hormonal App</h1>
-        <p className="text-gray-500 text-sm">Menopause & Hormone Support</p>
+      <div className="mb-5">
+        <h1 className="text-2xl font-bold text-gray-900">Hormonal Shot App</h1>
+        <p className="text-gray-500 text-sm">45-Day Hormonal Balance Protocol</p>
       </div>
 
-      <div className="bg-gradient-to-br from-[#2D2D2D] to-[#1a1a1a] rounded-2xl shadow-md overflow-hidden mb-6 text-white p-5 relative border border-gray-800">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4A574] rounded-full blur-3xl opacity-10 -mr-10 -mt-10"></div>
-        <h2 className="font-bold text-lg mb-3 relative z-10 text-[#D4A574]">Your Custom Dosage</h2>
-        <p className="text-gray-300 text-sm leading-relaxed relative z-10 bg-white/5 p-4 rounded-xl border border-white/10">
-          {dosageText}
-        </p>
+      {/* Dosage Card */}
+      {profile && (
+        <div className="bg-gradient-to-br from-purple-900 to-indigo-900 rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-pink-500 rounded-full blur-3xl opacity-15 -mr-10 -mt-10" />
+          <div className="relative z-10">
+            <div className="flex items-center space-x-2 mb-3">
+              <Droplet size={20} className="text-pink-300" />
+              <h2 className="font-bold text-sm">Your Personalized Dosage</h2>
+            </div>
+            <p className="text-sm text-purple-200 leading-relaxed bg-white/10 p-3 rounded-xl">
+              {getHormonalCalculator(Number(profile.weight), Number(profile.age))}
+            </p>
+          </div>
+        </div>
+      )}
 
-        <div className="mt-5 relative z-10">
-          <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Hormone Restoration Timeline</h3>
-          <div className="flex justify-between text-[10px] font-bold text-gray-500">
-            <span>Days 1-3</span>
-            <span>Days 4-7</span>
-            <span>Day 14+</span>
+      {/* Cycle Progress */}
+      <div className="bg-gradient-to-br from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500 rounded-full blur-3xl opacity-10 -mr-10 -mt-10" />
+        <div className="relative z-10">
+          <div className="flex items-center justify-between mb-3">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl">{content.cycle.icon}</span>
+              <div>
+                <h2 className="font-bold text-purple-400 text-sm">{content.cycle.name}</h2>
+                <p className="text-[10px] text-gray-400">{content.cycle.range}</p>
+              </div>
+            </div>
+            <span className="text-xs font-bold text-gray-500">{selectedDay}/45</span>
           </div>
-          <div className="w-full flex h-2 rounded-full overflow-hidden mt-1 bg-white/5">
-            <div className="bg-[#D4A574] w-[33%] border-r border-gray-800"></div>
-            <div className="bg-[#D4A574] w-[33%] border-r border-gray-800 opacity-50"></div>
-            <div className="bg-[#D4A574] w-[34%] opacity-25"></div>
+          <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
+            <div className="bg-gradient-to-r from-purple-500 to-pink-400 h-full rounded-full transition-all duration-700" style={{ width: `${(selectedDay / 45) * 100}%` }} />
           </div>
-          <div className="flex justify-between text-[10px] text-gray-500 mt-1">
-            <span>Hot flashes ease</span>
-            <span>Energy returns</span>
-            <span>Metabolism wakes</span>
-          </div>
+          <p className="text-xs text-gray-400 mt-3 leading-relaxed">{content.cycle.desc}</p>
         </div>
       </div>
 
-      <h3 className="font-bold text-gray-900 text-sm mb-3 px-1 flex items-center">
-        Premium Recipes
-      </h3>
-
-      <div className="space-y-3">
-        {recipes.map(recipe => (
-          <div key={recipe.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            <button
-              onClick={() => setActiveRecipe(activeRecipe === recipe.id ? null : recipe.id)}
-              className="w-full p-4 flex items-center justify-between hover:bg-gray-50 transition-colors text-left"
-            >
-              <div className="flex items-center space-x-3">
-                <div className={`${recipe.bg} p-3 rounded-xl ${recipe.color} flex-shrink-0 border ${recipe.border}`}>
-                  {recipe.icon}
+      {/* Cycles Overview */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 mb-5 overflow-hidden">
+        <button onClick={() => setShowCycles(!showCycles)} className="w-full p-4 flex justify-between items-center">
+          <h3 className="font-bold text-gray-900 text-sm">All Cycles</h3>
+          {showCycles ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+        </button>
+        {showCycles && (
+          <div className="px-4 pb-4 space-y-2">
+            {HORMONAL_CYCLES.map((cycle, i) => {
+              const ranges = [[1,15],[16,30],[31,45]];
+              const isActive = selectedDay >= ranges[i][0] && selectedDay <= ranges[i][1];
+              const isDone = selectedDay > ranges[i][1];
+              return (
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-purple-200 bg-purple-50' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                  <span className="text-lg">{cycle.icon}</span>
+                  <div className="flex-1">
+                    <p className={`text-xs font-bold ${isActive ? 'text-purple-600' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{cycle.name}</p>
+                    <p className="text-[10px] text-gray-400">{cycle.range}</p>
+                  </div>
+                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
+                  {isActive && <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />}
                 </div>
-                <div>
-                  <h4 className="font-bold text-gray-900 text-sm">{recipe.title}</h4>
-                  <p className="text-xs text-gray-500 mt-0.5">{recipe.desc}</p>
-                </div>
-              </div>
-              <ChevronRight size={18} className={`text-gray-400 transition-transform flex-shrink-0 ml-2 ${activeRecipe === recipe.id ? 'rotate-90' : ''}`} />
-            </button>
-
-            {activeRecipe === recipe.id && (
-              <div className="p-4 bg-gray-50 border-t border-gray-100 animate-fade-in">
-                <h5 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Ingredients</h5>
-                <ul className="space-y-1.5 mb-4">
-                  {recipe.ingredients.map((ing, i) => (
-                    <li key={i} className="flex items-start space-x-2 text-sm text-gray-700">
-                      <span className="text-[#5B8C5A] mt-0.5">•</span>
-                      <span>{ing}</span>
-                    </li>
-                  ))}
-                </ul>
-                <h5 className="text-xs font-bold text-gray-600 uppercase tracking-wider mb-2">Instructions</h5>
-                <p className="text-sm text-gray-700 leading-relaxed bg-white p-3 rounded-xl border border-gray-200 mb-3">
-                  {recipe.instructions}
-                </p>
-                <div className="flex items-start space-x-2 bg-[#E8F0E9] p-3 rounded-xl">
-                  <Lightbulb size={16} className="text-[#5B8C5A] mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-[#3D6B3D] leading-relaxed">{recipe.tip}</p>
-                </div>
-              </div>
-            )}
+              );
+            })}
           </div>
-        ))}
+        )}
+      </div>
+
+      {/* Day Selector */}
+      <div className="flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-5">
+        <button onClick={() => setSelectedDay(d => Math.max(1, d - 1))} disabled={selectedDay <= 1} className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-30">
+          <ChevronLeft size={20} className="text-gray-600" />
+        </button>
+        <div className="text-center">
+          <span className="text-2xl font-black text-gray-900">Day {selectedDay}</span>
+          <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{content.cycle.name}</p>
+        </div>
+        <button onClick={() => setSelectedDay(d => Math.min(45, d + 1))} disabled={selectedDay >= 45} className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-30">
+          <ChevronRight size={20} className="text-gray-600" />
+        </button>
+      </div>
+
+      {/* Morning Shot */}
+      <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-5 mb-4 border border-purple-200/30">
+        <div className="flex items-center space-x-2 mb-3">
+          <Droplet size={18} className="text-purple-500" />
+          <h3 className="font-bold text-gray-900 text-sm">Morning Hormonal Shot</h3>
+        </div>
+        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-purple-200/20">{content.shot}</p>
+      </div>
+
+      {/* Daily Routine Checklist */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-4">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center space-x-2">
+            <ListChecks size={18} className="text-[#5B8C5A]" />
+            <h3 className="font-bold text-gray-900 text-sm">Daily Routine</h3>
+          </div>
+          <span className="text-xs font-bold text-gray-400">{checklistDone}/{content.checklist.length}</span>
+        </div>
+        <div className="w-full bg-gray-100 rounded-full h-2 mb-4">
+          <div className="bg-[#5B8C5A] h-2 rounded-full transition-all duration-500" style={{ width: `${(checklistDone / content.checklist.length) * 100}%` }} />
+        </div>
+        <div className="space-y-2">
+          {content.checklist.map((item, i) => (
+            <button key={i} onClick={() => toggleCheck(i)} className={`w-full flex items-center space-x-3 p-3 rounded-xl border-2 transition-all text-left ${completedChecklist[i] ? 'bg-[#E8F0E9] border-[#5B8C5A]/30' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}>
+              <span className="text-lg">{item.icon}</span>
+              <span className={`flex-1 text-sm ${completedChecklist[i] ? 'text-[#3D6B3D] line-through' : 'text-gray-700'}`}>{item.task}</span>
+              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedChecklist[i] ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+                {completedChecklist[i] && <Check size={12} className="text-white" />}
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Recipe */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
+        <button onClick={() => setActiveSection(activeSection === 'recipe' ? null : 'recipe')} className="w-full p-5 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <UtensilsCrossed size={18} className="text-[#5B8C5A]" />
+            <div className="text-left">
+              <h3 className="font-bold text-gray-900 text-sm">{content.recipe.title}</h3>
+              <p className="text-[10px] text-gray-400 font-bold uppercase">{content.recipe.category} · {content.recipe.time}</p>
+            </div>
+          </div>
+          {activeSection === 'recipe' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+        </button>
+        {activeSection === 'recipe' && (
+          <div className="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p className="text-sm text-gray-600 leading-relaxed">{content.recipe.desc}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Educational Content */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
+        <button onClick={() => setActiveSection(activeSection === 'edu' ? null : 'edu')} className="w-full p-5 flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <BookOpen size={18} className="text-indigo-500" />
+            <div className="text-left">
+              <h3 className="font-bold text-gray-900 text-sm">{content.education.title}</h3>
+              <p className="text-[10px] text-gray-400 font-bold uppercase">Learn</p>
+            </div>
+          </div>
+          {activeSection === 'edu' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+        </button>
+        {activeSection === 'edu' && (
+          <div className="px-5 pb-5 border-t border-gray-100 pt-4">
+            <p className="text-sm text-gray-600 leading-relaxed">{content.education.content}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Symptom Tracker */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+        <button onClick={() => setShowSymptoms(!showSymptoms)} className="w-full p-4 flex justify-between items-center">
+          <div className="flex items-center space-x-2">
+            <Activity size={18} className="text-pink-500" />
+            <h3 className="font-bold text-gray-900 text-sm">Symptom Tracker</h3>
+          </div>
+          {showSymptoms ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
+        </button>
+        {showSymptoms && (
+          <div className="px-4 pb-4 border-t border-gray-100 pt-3">
+            <p className="text-xs text-gray-500 mb-3">Rate each symptom 0-5 (tap to cycle). Track weekly to see hormonal improvements.</p>
+            <div className="grid grid-cols-2 gap-2">
+              {SYMPTOM_CATEGORIES.map(s => {
+                const level = symptoms[s.id] || 0;
+                return (
+                  <button key={s.id} onClick={() => rateSymptom(s.id)} className={`p-3 rounded-xl border-2 text-left transition-all ${level > 0 ? 'border-purple-200 bg-purple-50' : 'border-gray-100 bg-gray-50'}`}>
+                    <div className="flex items-center justify-between mb-1">
+                      <span className="text-sm">{s.icon}</span>
+                      <div className="flex space-x-0.5">
+                        {[1,2,3,4,5].map(n => (
+                          <div key={n} className={`w-2 h-2 rounded-full ${n <= level ? 'bg-purple-500' : 'bg-gray-200'}`} />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-xs font-bold text-gray-700">{s.label}</p>
+                    <p className="text-[10px] text-gray-400">{level}/5</p>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
