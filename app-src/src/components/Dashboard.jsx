@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Lock, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -13,7 +13,8 @@ const Dashboard = () => {
   const [hydration, setHydration] = useState({ glasses: 0 });
   const [showConfetti, setShowConfetti] = useState(false);
   const [newBadge, setNewBadge] = useState(null);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(true);
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     const prof = getProfile();
@@ -57,10 +58,6 @@ const Dashboard = () => {
   const isSelectedDayCompleted = progress.completedDays.includes(selectedDay);
   const quote = getMotivationalQuote();
   const completedCount = progress.completedDays.length;
-  const currentPhase = PHASES.find((p, i) => {
-    const next = PHASES[i + 1];
-    return !next || completedCount < parseInt(next.range.split(' ')[0].replace('Days ', ''));
-  }) || PHASES[0];
 
   const phaseForDay = (day) => {
     if (day <= 7) return PHASES[0];
@@ -76,9 +73,19 @@ const Dashboard = () => {
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
 
+  const hasGut = true;
+  const hasHormones = true;
+  const hasSkin = true;
+
   return (
-    <div className="p-5 pb-8">
+    <div className="pb-8">
       <Confetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
+
+      {/* Top Bar — Updated Weekly */}
+      <div className="bg-gradient-to-r from-[#5B8C5A] to-[#4A7A49] px-4 py-2.5 flex items-center justify-center space-x-2">
+        <RefreshCw size={13} className="text-white/80" />
+        <p className="text-[11px] text-white font-semibold tracking-wide">App updated weekly with new content & features</p>
+      </div>
 
       {newBadge && (
         <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/30 animate-fade-in" onClick={() => setNewBadge(null)}>
@@ -91,15 +98,55 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Greeting */}
+      {/* Help Modal */}
+      {showHelp && (
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/40 animate-fade-in" onClick={() => setShowHelp(false)}>
+          <div className="bg-white rounded-3xl p-6 shadow-2xl animate-scale-in max-w-sm mx-4 max-h-[80vh] overflow-y-auto" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-bold text-lg text-gray-900">How to Use AlkaLean</h2>
+              <button onClick={() => setShowHelp(false)} className="p-1 rounded-full hover:bg-gray-100"><X size={20} className="text-gray-400" /></button>
+            </div>
+            <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
+              <div className="bg-[#E8F0E9] rounded-xl p-4">
+                <h3 className="font-bold text-[#5B8C5A] mb-1">Step 1: Start with Day 1</h3>
+                <p>Your <strong>30-Day Calendar</strong> is your main protocol. Each day has a unique alkaline shot recipe and health tip. Follow it in order — Day 1, Day 2, etc.</p>
+              </div>
+              <div className="bg-blue-50 rounded-xl p-4">
+                <h3 className="font-bold text-blue-600 mb-1">Step 2: Track Your Habits</h3>
+                <p>Below your daily protocol, track your <strong>water intake</strong> and <strong>daily habits</strong> (water, steps, shot). These build your streak and unlock badges!</p>
+              </div>
+              <div className="bg-amber-50 rounded-xl p-4">
+                <h3 className="font-bold text-amber-600 mb-1">Step 3: Explore Your Bonuses</h3>
+                <p>You have access to the <strong>Extended Protocol</strong> (180 days of recipes), <strong>Year-End Challenge</strong>, and bonus content like Sleep Guide, Journal & Recipes.</p>
+              </div>
+              <div className="bg-purple-50 rounded-xl p-4">
+                <h3 className="font-bold text-purple-600 mb-1">Step 4: Use Your Upgrades</h3>
+                <p>In the bottom menu, access your activated upgrades: <strong>7X Accelerator</strong> (gut health), <strong>Hormonal Balance</strong>, and <strong>Anti-Sagging Skin</strong>. Each has its own multi-week protocol.</p>
+              </div>
+              <div className="bg-rose-50 rounded-xl p-4">
+                <h3 className="font-bold text-rose-600 mb-1">New Content Every Week</h3>
+                <p>This app is <strong>updated weekly</strong> with new recipes, tips, challenges, and features. Keep checking back — there's always something new!</p>
+              </div>
+            </div>
+            <button onClick={() => setShowHelp(false)} className="w-full mt-4 bg-[#5B8C5A] text-white font-semibold py-3 rounded-xl">Got it!</button>
+          </div>
+        </div>
+      )}
+
+      <div className="p-5">
+
+      {/* Greeting + Help Button */}
       <div className="flex justify-between items-start mb-5 pt-2">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">
-            {greeting}{displayName ? `, ${displayName}` : ''} 🌿
+            {greeting}{displayName ? `, ${displayName}` : ''}
           </h1>
           <p className="text-gray-500 text-sm mt-0.5">Day {completedCount + 1} of your journey</p>
         </div>
-        <div className="flex flex-col items-end">
+        <div className="flex items-center space-x-2">
+          <button onClick={() => setShowHelp(true)} className="p-2 rounded-full bg-gray-50 border border-gray-100 hover:bg-gray-100 transition-all">
+            <HelpCircle size={18} className="text-gray-400" />
+          </button>
           <div className="flex items-center space-x-1.5 bg-gradient-to-r from-orange-50 to-amber-50 px-3 py-1.5 rounded-full border border-orange-200">
             <Flame size={16} className={progress.streak > 0 ? "text-orange-500 fill-orange-500" : "text-gray-400"} />
             <span className="font-bold text-orange-600 text-sm">{progress.streak}</span>
@@ -107,72 +154,16 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Feature Banners */}
-      <div className="space-y-3 mb-5">
-        <button
-          onClick={() => navigate('/extended')}
-          className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 text-left relative overflow-hidden border border-gray-800"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
-          <div className="relative z-10 flex items-center justify-between">
-            <div>
-              <div className="flex items-center space-x-2 mb-1">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">180 Days</span>
-              </div>
-              <h3 className="font-bold text-white text-sm">Extended Protocol</h3>
-              <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat.</p>
-            </div>
-            <ArrowRight size={18} className="text-[#D4A574] flex-shrink-0 ml-3" />
+      {/* START HERE — Getting Started Card */}
+      <div className="bg-gradient-to-br from-[#5B8C5A] to-[#3D6B3D] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-3xl opacity-5 -mr-10 -mt-10" />
+        <div className="relative z-10">
+          <div className="flex items-center space-x-2 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 bg-white/15 px-2.5 py-0.5 rounded-full">Start Here</span>
           </div>
-        </button>
-
-        <button
-          onClick={() => navigate('/yearend')}
-          className="w-full bg-gradient-to-r from-red-900 to-green-900 rounded-2xl p-4 text-left relative overflow-hidden border border-red-800"
-        >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-red-500 rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
-          <div className="relative z-10 flex items-center justify-between">
-            <div>
-              <div className="flex items-center space-x-2 mb-1">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-red-300 bg-red-500/20 px-2 py-0.5 rounded-full">Bonus</span>
-                <span className="text-[9px] font-bold uppercase tracking-widest text-green-300 bg-green-500/20 px-2 py-0.5 rounded-full">Oct-Dec</span>
-              </div>
-              <h3 className="font-bold text-white text-sm">Year-End Finish Line Protocol</h3>
-              <p className="text-[11px] text-gray-400 mt-0.5">97 daily missions to close the year as your best self.</p>
-            </div>
-            <ArrowRight size={18} className="text-red-300 flex-shrink-0 ml-3" />
-          </div>
-        </button>
-      </div>
-
-      {/* Weekly Summary */}
-      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
-        <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
-          <CalendarIcon size={16} className="text-[#5B8C5A] mr-2" /> Weekly Summary
-        </h3>
-        <div className="grid grid-cols-4 gap-2">
-          <div className="text-center p-2 bg-[#E8F0E9] rounded-xl">
-            <p className="text-lg font-black text-[#5B8C5A]">{completedCount}</p>
-            <p className="text-[9px] text-gray-500 font-bold">Days Done</p>
-          </div>
-          <div className="text-center p-2 bg-orange-50 rounded-xl">
-            <p className="text-lg font-black text-orange-600">{progress.streak}</p>
-            <p className="text-[9px] text-gray-500 font-bold">Streak</p>
-          </div>
-          <div className="text-center p-2 bg-blue-50 rounded-xl">
-            <p className="text-lg font-black text-blue-600">{hydration.glasses}</p>
-            <p className="text-[9px] text-gray-500 font-bold">Water</p>
-          </div>
-          <div className="text-center p-2 bg-purple-50 rounded-xl">
-            <p className="text-lg font-black text-purple-600">{(progress.badges || []).length}</p>
-            <p className="text-[9px] text-gray-500 font-bold">Badges</p>
-          </div>
+          <h2 className="font-bold text-lg mb-1">Your 30-Day AlkaLean Protocol</h2>
+          <p className="text-white/70 text-xs leading-relaxed">Follow your daily shot recipe below. Mark each day complete to build your streak and unlock badges.</p>
         </div>
-      </div>
-
-      {/* Motivational Quote */}
-      <div className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-4 mb-5 border border-[#D4A574]/20">
-        <p className="text-sm text-gray-700 italic leading-relaxed text-center">"{quote}"</p>
       </div>
 
       {/* Phase Progress */}
@@ -210,7 +201,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* 30-Day Calendar (collapsible) */}
+      {/* 30-Day Calendar (open by default) */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 mb-5 overflow-hidden">
         <button
           onClick={() => setShowCalendar(!showCalendar)}
@@ -309,7 +300,7 @@ const Dashboard = () => {
               : 'bg-blue-50 text-blue-600 hover:bg-blue-100 border border-blue-200'
           }`}
         >
-          {hydration.glasses >= 8 ? '💧 Daily Goal Reached!' : '+ Add Glass of Water'}
+          {hydration.glasses >= 8 ? 'Daily Goal Reached!' : '+ Add Glass of Water'}
         </button>
       </div>
 
@@ -339,6 +330,128 @@ const Dashboard = () => {
             </button>
           ))}
         </div>
+      </div>
+
+      {/* Weekly Summary */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+        <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
+          <CalendarIcon size={16} className="text-[#5B8C5A] mr-2" /> Weekly Summary
+        </h3>
+        <div className="grid grid-cols-4 gap-2">
+          <div className="text-center p-2 bg-[#E8F0E9] rounded-xl">
+            <p className="text-lg font-black text-[#5B8C5A]">{completedCount}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Days Done</p>
+          </div>
+          <div className="text-center p-2 bg-orange-50 rounded-xl">
+            <p className="text-lg font-black text-orange-600">{progress.streak}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Streak</p>
+          </div>
+          <div className="text-center p-2 bg-blue-50 rounded-xl">
+            <p className="text-lg font-black text-blue-600">{hydration.glasses}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Water</p>
+          </div>
+          <div className="text-center p-2 bg-purple-50 rounded-xl">
+            <p className="text-lg font-black text-purple-600">{(progress.badges || []).length}</p>
+            <p className="text-[9px] text-gray-500 font-bold">Badges</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Motivational Quote */}
+      <div className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-4 mb-5 border border-[#D4A574]/20">
+        <p className="text-sm text-gray-700 italic leading-relaxed text-center">"{quote}"</p>
+      </div>
+
+      {/* Active Upgrades */}
+      <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
+        <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
+          <Zap size={16} className="text-amber-500 mr-2" /> Your Active Upgrades
+        </h3>
+        <div className="space-y-2">
+          {hasGut && (
+            <button onClick={() => navigate('/gut')} className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-emerald-50 to-green-50 rounded-xl border border-emerald-100 hover:shadow-sm transition-all">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-emerald-100 rounded-lg flex items-center justify-center"><Flame size={16} className="text-emerald-600" /></div>
+                <div className="text-left">
+                  <p className="text-xs font-bold text-gray-900">7X Accelerator</p>
+                  <p className="text-[10px] text-gray-500">60-day gut health protocol</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-1.5">
+                <span className="text-[9px] font-bold text-emerald-600 bg-emerald-100 px-2 py-0.5 rounded-full">ACTIVE</span>
+                <ArrowRight size={14} className="text-gray-400" />
+              </div>
+            </button>
+          )}
+          {hasHormones && (
+            <button onClick={() => navigate('/hormones')} className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-indigo-50 rounded-xl border border-purple-100 hover:shadow-sm transition-all">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center"><Droplets size={16} className="text-purple-600" /></div>
+                <div className="text-left">
+                  <p className="text-xs font-bold text-gray-900">Hormonal Balance</p>
+                  <p className="text-[10px] text-gray-500">45-day hormonal protocol</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-1.5">
+                <span className="text-[9px] font-bold text-purple-600 bg-purple-100 px-2 py-0.5 rounded-full">ACTIVE</span>
+                <ArrowRight size={14} className="text-gray-400" />
+              </div>
+            </button>
+          )}
+          {hasSkin && (
+            <button onClick={() => navigate('/skin')} className="w-full flex items-center justify-between p-3 bg-gradient-to-r from-rose-50 to-pink-50 rounded-xl border border-rose-100 hover:shadow-sm transition-all">
+              <div className="flex items-center space-x-3">
+                <div className="w-8 h-8 bg-rose-100 rounded-lg flex items-center justify-center"><Sparkles size={16} className="text-rose-600" /></div>
+                <div className="text-left">
+                  <p className="text-xs font-bold text-gray-900">Anti-Sagging Skin</p>
+                  <p className="text-[10px] text-gray-500">60-day collagen protocol</p>
+                </div>
+              </div>
+              <div className="flex items-center space-x-1.5">
+                <span className="text-[9px] font-bold text-rose-600 bg-rose-100 px-2 py-0.5 rounded-full">ACTIVE</span>
+                <ArrowRight size={14} className="text-gray-400" />
+              </div>
+            </button>
+          )}
+        </div>
+      </div>
+
+      {/* Extended Protocols */}
+      <div className="space-y-3 mb-5">
+        <button
+          onClick={() => navigate('/extended')}
+          className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 text-left relative overflow-hidden border border-gray-800"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <div className="flex items-center space-x-2 mb-1">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">180 Days</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">Extended Protocol</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat.</p>
+            </div>
+            <ArrowRight size={18} className="text-[#D4A574] flex-shrink-0 ml-3" />
+          </div>
+        </button>
+
+        <button
+          onClick={() => navigate('/yearend')}
+          className="w-full bg-gradient-to-r from-red-900 to-green-900 rounded-2xl p-4 text-left relative overflow-hidden border border-red-800"
+        >
+          <div className="absolute top-0 right-0 w-32 h-32 bg-red-500 rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <div className="flex items-center space-x-2 mb-1">
+                <span className="text-[9px] font-bold uppercase tracking-widest text-red-300 bg-red-500/20 px-2 py-0.5 rounded-full">Bonus</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-green-300 bg-green-500/20 px-2 py-0.5 rounded-full">Oct-Dec</span>
+              </div>
+              <h3 className="font-bold text-white text-sm">Year-End Finish Line Protocol</h3>
+              <p className="text-[11px] text-gray-400 mt-0.5">97 daily missions to close the year as your best self.</p>
+            </div>
+            <ArrowRight size={18} className="text-red-300 flex-shrink-0 ml-3" />
+          </div>
+        </button>
       </div>
 
       {/* Did You Know */}
@@ -390,11 +503,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Disclaimer */}
-      <div className="text-center mt-8 mb-4 px-4">
-        <p className="text-[10px] text-gray-400 leading-relaxed">
-          Educational content only. Consult your doctor before making any changes to your routine. Individual results may vary. This app does not replace professional medical advice.
-        </p>
+
       </div>
     </div>
   );
