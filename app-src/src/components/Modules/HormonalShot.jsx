@@ -118,13 +118,13 @@ const HormonalShot = () => {
               const isActive = selectedDay >= ranges[i][0] && selectedDay <= ranges[i][1];
               const isDone = selectedDay > ranges[i][1];
               return (
-                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-purple-200 bg-purple-50' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-purple-200 bg-purple-50' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{cycle.icon}</span>
                   <div className="flex-1">
-                    <p className={`text-xs font-bold ${isActive ? 'text-purple-600' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{cycle.name}</p>
+                    <p className={`text-xs font-bold ${isActive ? 'text-purple-600' : isDone ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{cycle.name}</p>
                     <p className="text-[10px] text-gray-400">{cycle.range}</p>
                   </div>
-                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
+                  {isDone && <Check size={14} className="text-[#6B3FA0]" />}
                   {isActive && <div className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />}
                 </div>
               );
@@ -160,20 +160,20 @@ const HormonalShot = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
-            <ListChecks size={18} className="text-[#5B8C5A]" />
+            <ListChecks size={18} className="text-[#6B3FA0]" />
             <h3 className="font-bold text-gray-900 text-sm">Daily Routine</h3>
           </div>
           <span className="text-xs font-bold text-gray-400">{checklistDone}/{content.checklist.length}</span>
         </div>
         <div className="w-full bg-gray-100 rounded-full h-2 mb-4">
-          <div className="bg-[#5B8C5A] h-2 rounded-full transition-all duration-500" style={{ width: `${(checklistDone / content.checklist.length) * 100}%` }} />
+          <div className="bg-[#6B3FA0] h-2 rounded-full transition-all duration-500" style={{ width: `${(checklistDone / content.checklist.length) * 100}%` }} />
         </div>
         <div className="space-y-2">
           {content.checklist.map((item, i) => (
-            <button key={i} onClick={() => toggleCheck(i)} className={`w-full flex items-center space-x-3 p-3 rounded-xl border-2 transition-all text-left ${completedChecklist[i] ? 'bg-[#E8F0E9] border-[#5B8C5A]/30' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}>
+            <button key={i} onClick={() => toggleCheck(i)} className={`w-full flex items-center space-x-3 p-3 rounded-xl border-2 transition-all text-left ${completedChecklist[i] ? 'bg-[#F0ECF9] border-[#6B3FA0]/30' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}>
               <span className="text-lg">{item.icon}</span>
-              <span className={`flex-1 text-sm ${completedChecklist[i] ? 'text-[#3D6B3D] line-through' : 'text-gray-700'}`}>{item.task}</span>
-              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedChecklist[i] ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+              <span className={`flex-1 text-sm ${completedChecklist[i] ? 'text-[#4A2580] line-through' : 'text-gray-700'}`}>{item.task}</span>
+              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedChecklist[i] ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
                 {completedChecklist[i] && <Check size={12} className="text-white" />}
               </div>
             </button>
@@ -185,7 +185,7 @@ const HormonalShot = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
         <button onClick={() => setActiveSection(activeSection === 'recipe' ? null : 'recipe')} className="w-full p-5 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <UtensilsCrossed size={18} className="text-[#5B8C5A]" />
+            <UtensilsCrossed size={18} className="text-[#6B3FA0]" />
             <div className="text-left">
               <h3 className="font-bold text-gray-900 text-sm">{content.recipe.title}</h3>
               <p className="text-[10px] text-gray-400 font-bold uppercase">{content.recipe.category} · {content.recipe.time}</p>

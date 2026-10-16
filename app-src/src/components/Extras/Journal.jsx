@@ -113,7 +113,7 @@ const Journal = () => {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="bg-[#5B8C5A] text-white p-3 rounded-full shadow-lg shadow-[#5B8C5A]/20"
+          className="bg-[#6B3FA0] text-white p-3 rounded-full shadow-lg shadow-[#6B3FA0]/20"
         >
           {showForm ? <X size={20} /> : <Plus size={20} />}
         </button>
@@ -161,7 +161,7 @@ const Journal = () => {
                   key={m.label}
                   onClick={() => setMood(m)}
                   className={`flex-1 flex flex-col items-center py-2.5 rounded-xl border-2 transition-all ${
-                    mood?.label === m.label ? 'border-[#5B8C5A] bg-[#E8F0E9]' : 'border-gray-100 bg-gray-50'
+                    mood?.label === m.label ? 'border-[#6B3FA0] bg-[#F0ECF9]' : 'border-gray-100 bg-gray-50'
                   }`}
                 >
                   <span className="text-xl mb-0.5">{m.emoji}</span>
@@ -179,7 +179,7 @@ const Journal = () => {
                   key={e.label}
                   onClick={() => setEnergy(e)}
                   className={`flex-1 flex flex-col items-center py-2.5 rounded-xl border-2 transition-all ${
-                    energy?.label === e.label ? 'border-[#5B8C5A] bg-[#E8F0E9]' : 'border-gray-100 bg-gray-50'
+                    energy?.label === e.label ? 'border-[#6B3FA0] bg-[#F0ECF9]' : 'border-gray-100 bg-gray-50'
                   }`}
                 >
                   <span className="text-xl mb-0.5">{e.emoji}</span>
@@ -198,13 +198,13 @@ const Journal = () => {
               onChange={(e) => setText(e.target.value)}
               placeholder={usePrompt ? "Take a moment to reflect and write freely..." : "How does your body feel today? Any changes you've noticed? Write freely..."}
               rows={4}
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#5B8C5A] resize-none"
+              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#6B3FA0] resize-none"
             />
           </div>
 
           <button
             onClick={handleSubmit}
-            className="w-full bg-[#5B8C5A] text-white font-semibold py-3 rounded-xl hover:bg-[#4A7A49] transition-colors"
+            className="w-full bg-[#6B3FA0] text-white font-semibold py-3 rounded-xl hover:bg-[#5A2E8E] transition-colors"
           >
             Save Entry
           </button>

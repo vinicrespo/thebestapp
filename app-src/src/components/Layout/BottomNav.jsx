@@ -22,17 +22,17 @@ const BottomNav = () => {
             className={({ isActive }) =>
               `flex flex-col items-center space-y-0.5 px-2 py-1 rounded-xl transition-all ${
                 isActive
-                  ? 'text-[#5B8C5A]'
+                  ? 'text-[#6B3FA0]'
                   : 'text-gray-400 hover:text-gray-600'
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <div className={`p-1.5 rounded-xl transition-all ${isActive ? 'bg-[#E8F0E9]' : ''}`}>
+                <div className={`p-1.5 rounded-xl transition-all ${isActive ? 'bg-[#F0ECF9]' : ''}`}>
                   <Icon size={20} strokeWidth={isActive ? 2.5 : 2} />
                 </div>
-                <span className={`text-[9px] font-bold ${isActive ? 'text-[#5B8C5A]' : ''}`}>{item.label}</span>
+                <span className={`text-[9px] font-bold ${isActive ? 'text-[#6B3FA0]' : ''}`}>{item.label}</span>
               </>
             )}
           </NavLink>

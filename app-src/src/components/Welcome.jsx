@@ -16,7 +16,7 @@ const Welcome = ({ onComplete, profile }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#F5E6D3] via-white to-[#E8F0E9] flex flex-col items-center justify-center p-8 text-center">
+    <div className="min-h-screen bg-gradient-to-b from-[#FEF0E4] via-white to-[#F0ECF9] flex flex-col items-center justify-center p-8 text-center">
       <div className={`transition-all duration-700 ${step >= 1 ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg mx-auto mb-6">
           <Heart className="text-[#C48B8F]" size={36} fill="#C48B8F" />
@@ -38,14 +38,14 @@ const Welcome = ({ onComplete, profile }) => {
           </p>
         </div>
 
-        <div className="flex items-center justify-center space-x-2 text-sm text-[#5B8C5A] font-semibold mb-8">
+        <div className="flex items-center justify-center space-x-2 text-sm text-[#6B3FA0] font-semibold mb-8">
           <Sparkles size={16} />
           <span>Your personalized protocol is ready</span>
         </div>
 
         <button
           onClick={handleContinue}
-          className="bg-[#5B8C5A] text-white font-semibold py-4 px-8 rounded-2xl flex items-center justify-center space-x-2 mx-auto shadow-lg shadow-[#5B8C5A]/30 hover:bg-[#4A7A49] transition-colors animate-pulse-soft"
+          className="bg-[#6B3FA0] text-white font-semibold py-4 px-8 rounded-2xl flex items-center justify-center space-x-2 mx-auto shadow-lg shadow-[#6B3FA0]/30 hover:bg-[#5A2E8E] transition-colors animate-pulse-soft"
         >
           <span>Let's Begin</span>
           <ArrowRight size={20} />

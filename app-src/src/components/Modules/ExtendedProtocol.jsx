@@ -43,7 +43,7 @@ const ExtendedProtocol = () => {
             The 180-Day Extended Protocol unlocks after you finish all 30 days. You've completed <strong>{completedCount}/30</strong> days so far. Keep going!
           </p>
           <div className="w-48 bg-gray-100 rounded-full h-2.5 mx-auto mt-4 overflow-hidden">
-            <div className="bg-[#5B8C5A] h-full rounded-full transition-all" style={{ width: `${(completedCount / 30) * 100}%` }} />
+            <div className="bg-[#6B3FA0] h-full rounded-full transition-all" style={{ width: `${(completedCount / 30) * 100}%` }} />
           </div>
         </div>
       </div>
@@ -63,20 +63,20 @@ const ExtendedProtocol = () => {
 
       {/* Overall Progress */}
       <div className="bg-gradient-to-br from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4A574] rounded-full blur-3xl opacity-10 -mr-10 -mt-10" />
+        <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4874D] rounded-full blur-3xl opacity-10 -mr-10 -mt-10" />
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <span className="text-2xl">{content.phase.icon}</span>
               <div>
-                <h2 className="font-bold text-[#D4A574] text-sm">{content.phase.name}</h2>
+                <h2 className="font-bold text-[#D4874D] text-sm">{content.phase.name}</h2>
                 <p className="text-[10px] text-gray-400">{content.phase.months}</p>
               </div>
             </div>
             <span className="text-xs font-bold text-gray-500">{overallProgress}/180</span>
           </div>
           <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-            <div className="bg-gradient-to-r from-[#D4A574] to-[#E8C9A0] h-full rounded-full transition-all duration-700" style={{ width: `${(overallProgress / 180) * 100}%` }} />
+            <div className="bg-gradient-to-r from-[#D4874D] to-[#E8A035] h-full rounded-full transition-all duration-700" style={{ width: `${(overallProgress / 180) * 100}%` }} />
           </div>
           <p className="text-xs text-gray-400 mt-3 leading-relaxed">{content.phase.desc}</p>
         </div>
@@ -96,14 +96,14 @@ const ExtendedProtocol = () => {
               const isActive = overallProgress >= (phaseStart - 30) && overallProgress < (phaseEnd - 30);
               const isDone = overallProgress >= (phaseEnd - 30);
               return (
-                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-[#D4A574]/30 bg-[#F5E6D3]/30' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-[#D4874D]/30 bg-[#FEF0E4]/30' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{phase.icon}</span>
                   <div className="flex-1">
-                    <p className={`text-xs font-bold ${isActive ? 'text-[#D4A574]' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{phase.name}</p>
+                    <p className={`text-xs font-bold ${isActive ? 'text-[#D4874D]' : isDone ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{phase.name}</p>
                     <p className="text-[10px] text-gray-400">{phase.months}</p>
                   </div>
-                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
-                  {isActive && <div className="w-2 h-2 rounded-full bg-[#D4A574] animate-pulse" />}
+                  {isDone && <Check size={14} className="text-[#6B3FA0]" />}
+                  {isActive && <div className="w-2 h-2 rounded-full bg-[#D4874D] animate-pulse" />}
                 </div>
               );
             })}
@@ -126,12 +126,12 @@ const ExtendedProtocol = () => {
       </div>
 
       {/* Morning Shot */}
-      <div className="bg-gradient-to-br from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-5 mb-4 border border-[#D4A574]/20">
+      <div className="bg-gradient-to-br from-[#FEF0E4] to-[#F0ECF9] rounded-2xl p-5 mb-4 border border-[#D4874D]/20">
         <div className="flex items-center space-x-2 mb-3">
-          <Droplets size={18} className="text-[#D4A574]" />
+          <Droplets size={18} className="text-[#D4874D]" />
           <h3 className="font-bold text-gray-900 text-sm">Morning Shot</h3>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4A574]/10">
+        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4874D]/10">
           {content.shot}
         </p>
       </div>
@@ -154,7 +154,7 @@ const ExtendedProtocol = () => {
           className="w-full p-5 flex items-center justify-between"
         >
           <div className="flex items-center space-x-2">
-            <UtensilsCrossed size={18} className="text-[#5B8C5A]" />
+            <UtensilsCrossed size={18} className="text-[#6B3FA0]" />
             <div className="text-left">
               <h3 className="font-bold text-gray-900 text-sm">{content.meal.title}</h3>
               <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{content.meal.category}</p>
@@ -170,12 +170,12 @@ const ExtendedProtocol = () => {
       </div>
 
       {/* Wellness Challenge */}
-      <div className="bg-gradient-to-r from-[#E8F0E9] to-[#F5E6D3] rounded-2xl p-5 border border-[#5B8C5A]/10">
+      <div className="bg-gradient-to-r from-[#F0ECF9] to-[#FEF0E4] rounded-2xl p-5 border border-[#6B3FA0]/10">
         <div className="flex items-center space-x-2 mb-3">
-          <Target size={18} className="text-[#5B8C5A]" />
+          <Target size={18} className="text-[#6B3FA0]" />
           <h3 className="font-bold text-gray-900 text-sm">Today's Challenge</h3>
         </div>
-        <div className="bg-white/60 p-4 rounded-xl border border-[#5B8C5A]/10">
+        <div className="bg-white/60 p-4 rounded-xl border border-[#6B3FA0]/10">
           <div className="flex items-start space-x-3">
             <span className="text-2xl">{content.challenge.icon}</span>
             <div>

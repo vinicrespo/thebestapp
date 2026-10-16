@@ -36,8 +36,8 @@ const Auth = ({ onLogin }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#E8F0E9] to-white p-6">
-        <div className="w-16 h-16 bg-[#5B8C5A] rounded-full flex items-center justify-center mb-8 animate-pulse-soft">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#F0ECF9] to-white p-6">
+        <div className="w-16 h-16 bg-[#6B3FA0] rounded-full flex items-center justify-center mb-8 animate-pulse-soft">
           <Leaf className="text-white" size={28} />
         </div>
         <div className="space-y-4 w-full max-w-xs">
@@ -49,9 +49,9 @@ const Auth = ({ onLogin }) => {
               }`}
             >
               {index < loadingStep ? (
-                <CheckCircle className="w-5 h-5 text-[#5B8C5A] flex-shrink-0" />
+                <CheckCircle className="w-5 h-5 text-[#6B3FA0] flex-shrink-0" />
               ) : index === loadingStep ? (
-                <div className="w-5 h-5 border-2 border-[#5B8C5A] border-t-transparent rounded-full animate-spin flex-shrink-0" />
+                <div className="w-5 h-5 border-2 border-[#6B3FA0] border-t-transparent rounded-full animate-spin flex-shrink-0" />
               ) : (
                 <div className="w-5 h-5 flex-shrink-0" />
               )}
@@ -66,7 +66,7 @@ const Auth = ({ onLogin }) => {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#F5E6D3] via-white to-[#E8F0E9] p-6">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-[#FEF0E4] via-white to-[#F0ECF9] p-6">
       <div className="w-full max-w-sm text-center">
         <img
           src="/app/logo.png"
@@ -85,11 +85,11 @@ const Auth = ({ onLogin }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
             required
-            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#5B8C5A] focus:border-transparent bg-white text-center text-base"
+            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#6B3FA0] focus:border-transparent bg-white text-center text-base"
           />
           <button
             type="submit"
-            className="w-full bg-[#5B8C5A] text-white font-semibold py-3.5 rounded-xl hover:bg-[#4A7A49] transition-colors shadow-lg shadow-[#5B8C5A]/20"
+            className="w-full bg-[#6B3FA0] text-white font-semibold py-3.5 rounded-xl hover:bg-[#5A2E8E] transition-colors shadow-lg shadow-[#6B3FA0]/20"
           >
             Access My Protocol
           </button>

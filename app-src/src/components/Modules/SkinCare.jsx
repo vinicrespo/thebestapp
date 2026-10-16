@@ -66,20 +66,20 @@ const SkinCare = () => {
 
       {/* Phase Progress */}
       <div className="bg-gradient-to-br from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4A574] rounded-full blur-3xl opacity-10 -mr-10 -mt-10" />
+        <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4874D] rounded-full blur-3xl opacity-10 -mr-10 -mt-10" />
         <div className="relative z-10">
           <div className="flex items-center justify-between mb-3">
             <div className="flex items-center space-x-2">
               <span className="text-2xl">{content.phase.icon}</span>
               <div>
-                <h2 className="font-bold text-[#D4A574] text-sm">{content.phase.name}</h2>
+                <h2 className="font-bold text-[#D4874D] text-sm">{content.phase.name}</h2>
                 <p className="text-[10px] text-gray-400">{content.phase.range}</p>
               </div>
             </div>
             <span className="text-xs font-bold text-gray-500">{selectedDay}/60</span>
           </div>
           <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-            <div className="bg-gradient-to-r from-[#D4A574] to-[#E8C9A0] h-full rounded-full transition-all duration-700" style={{ width: `${(selectedDay / 60) * 100}%` }} />
+            <div className="bg-gradient-to-r from-[#D4874D] to-[#E8A035] h-full rounded-full transition-all duration-700" style={{ width: `${(selectedDay / 60) * 100}%` }} />
           </div>
           <p className="text-xs text-gray-400 mt-3 leading-relaxed">{content.phase.desc}</p>
         </div>
@@ -98,14 +98,14 @@ const SkinCare = () => {
               const isActive = selectedDay >= ranges[i][0] && selectedDay <= ranges[i][1];
               const isDone = selectedDay > ranges[i][1];
               return (
-                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-[#D4A574]/30 bg-[#F5E6D3]/30' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-[#D4874D]/30 bg-[#FEF0E4]/30' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{phase.icon}</span>
                   <div className="flex-1">
-                    <p className={`text-xs font-bold ${isActive ? 'text-[#D4A574]' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{phase.name}</p>
+                    <p className={`text-xs font-bold ${isActive ? 'text-[#D4874D]' : isDone ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{phase.name}</p>
                     <p className="text-[10px] text-gray-400">{phase.range}</p>
                   </div>
-                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
-                  {isActive && <div className="w-2 h-2 rounded-full bg-[#D4A574] animate-pulse" />}
+                  {isDone && <Check size={14} className="text-[#6B3FA0]" />}
+                  {isActive && <div className="w-2 h-2 rounded-full bg-[#D4874D] animate-pulse" />}
                 </div>
               );
             })}
@@ -131,23 +131,23 @@ const SkinCare = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-4">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
-            <Droplets size={18} className="text-[#5B8C5A]" />
+            <Droplets size={18} className="text-[#6B3FA0]" />
             <h3 className="font-bold text-gray-900 text-sm">Daily Skin Routine</h3>
           </div>
           <span className="text-xs font-bold text-gray-400">{stepsCompleted}/{content.routine.length}</span>
         </div>
         <div className="w-full bg-gray-100 rounded-full h-2 mb-4">
-          <div className="bg-[#5B8C5A] h-2 rounded-full transition-all duration-500" style={{ width: `${(stepsCompleted / content.routine.length) * 100}%` }} />
+          <div className="bg-[#6B3FA0] h-2 rounded-full transition-all duration-500" style={{ width: `${(stepsCompleted / content.routine.length) * 100}%` }} />
         </div>
         <div className="space-y-2">
           {content.routine.map((item, i) => (
-            <button key={i} onClick={() => toggleStep(i)} className={`w-full flex items-center space-x-3 p-3 rounded-xl border-2 transition-all text-left ${completedSteps[i] ? 'bg-[#E8F0E9] border-[#5B8C5A]/30' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}>
+            <button key={i} onClick={() => toggleStep(i)} className={`w-full flex items-center space-x-3 p-3 rounded-xl border-2 transition-all text-left ${completedSteps[i] ? 'bg-[#F0ECF9] border-[#6B3FA0]/30' : 'bg-gray-50 border-transparent hover:border-gray-200'}`}>
               <span className="text-lg">{item.icon}</span>
               <div className="flex-1">
-                <span className={`text-sm ${completedSteps[i] ? 'text-[#3D6B3D] line-through' : 'text-gray-700'}`}>{item.step}</span>
+                <span className={`text-sm ${completedSteps[i] ? 'text-[#4A2580] line-through' : 'text-gray-700'}`}>{item.step}</span>
                 <span className="text-[10px] text-gray-400 block">{item.time}</span>
               </div>
-              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedSteps[i] ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+              <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedSteps[i] ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
                 {completedSteps[i] && <Check size={12} className="text-white" />}
               </div>
             </button>
@@ -159,7 +159,7 @@ const SkinCare = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
         <button onClick={() => setActiveSection(activeSection === 'recipe' ? null : 'recipe')} className="w-full p-5 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <UtensilsCrossed size={18} className="text-[#D4A574]" />
+            <UtensilsCrossed size={18} className="text-[#D4874D]" />
             <div className="text-left">
               <h3 className="font-bold text-gray-900 text-sm">{content.recipe.title}</h3>
               <p className="text-[10px] text-gray-400 font-bold uppercase">Collagen Recipe · {content.recipe.time}</p>
@@ -194,18 +194,18 @@ const SkinCare = () => {
       </div>
 
       {/* DIY Mask */}
-      <div className="bg-gradient-to-br from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-5 mb-4 border border-[#D4A574]/20">
+      <div className="bg-gradient-to-br from-[#FEF0E4] to-[#F0ECF9] rounded-2xl p-5 mb-4 border border-[#D4874D]/20">
         <div className="flex items-center space-x-2 mb-3">
-          <Sparkles size={18} className="text-[#D4A574]" />
+          <Sparkles size={18} className="text-[#D4874D]" />
           <h3 className="font-bold text-gray-900 text-sm">Weekly DIY Mask: {content.mask.title}</h3>
         </div>
         <p className="text-xs text-gray-500 mb-2 font-bold uppercase">{content.mask.benefit} · {content.mask.time}</p>
-        <div className="bg-white/60 p-4 rounded-xl border border-[#D4A574]/10 mb-3">
+        <div className="bg-white/60 p-4 rounded-xl border border-[#D4874D]/10 mb-3">
           <p className="text-xs font-bold text-gray-600 mb-1">Ingredients:</p>
           <ul className="space-y-1">
             {content.mask.ingredients.map((ing, i) => (
               <li key={i} className="text-xs text-gray-600 flex items-start space-x-1">
-                <span className="text-[#5B8C5A]">•</span><span>{ing}</span>
+                <span className="text-[#6B3FA0]">•</span><span>{ing}</span>
               </li>
             ))}
           </ul>
@@ -238,12 +238,12 @@ const SkinCare = () => {
               {BODY_AREAS.map(area => {
                 const level = bodyRatings[area.id] || 0;
                 return (
-                  <button key={area.id} onClick={() => rateBody(area.id)} className={`p-3 rounded-xl border-2 text-left transition-all ${level > 0 ? 'border-[#D4A574]/30 bg-[#F5E6D3]/20' : 'border-gray-100 bg-gray-50'}`}>
+                  <button key={area.id} onClick={() => rateBody(area.id)} className={`p-3 rounded-xl border-2 text-left transition-all ${level > 0 ? 'border-[#D4874D]/30 bg-[#FEF0E4]/20' : 'border-gray-100 bg-gray-50'}`}>
                     <div className="flex items-center justify-between mb-1">
                       <span className="text-sm">{area.icon}</span>
                       <div className="flex space-x-0.5">
                         {[1,2,3,4,5].map(n => (
-                          <div key={n} className={`w-2 h-2 rounded-full ${n <= level ? 'bg-[#D4A574]' : 'bg-gray-200'}`} />
+                          <div key={n} className={`w-2 h-2 rounded-full ${n <= level ? 'bg-[#D4874D]' : 'bg-gray-200'}`} />
                         ))}
                       </div>
                     </div>

@@ -102,14 +102,14 @@ const ProgressTracker = () => {
 
       <div className="grid grid-cols-2 gap-3 mb-5">
         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-          <div className="bg-[#E8F0E9] p-2.5 rounded-full text-[#5B8C5A] mb-2">
+          <div className="bg-[#F0ECF9] p-2.5 rounded-full text-[#6B3FA0] mb-2">
             <Scale size={20} />
           </div>
           <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Current</p>
           <p className="text-2xl font-black text-gray-900">{latestWeight.toFixed(1)} <span className="text-xs font-normal text-gray-400">lbs</span></p>
         </div>
         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
-          <div className="bg-[#F5E6D3] p-2.5 rounded-full text-[#D4A574] mb-2">
+          <div className="bg-[#FEF0E4] p-2.5 rounded-full text-[#D4874D] mb-2">
             <Target size={20} />
           </div>
           <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Goal</p>
@@ -120,17 +120,17 @@ const ProgressTracker = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
         <div className="flex justify-between items-end mb-3">
           <h3 className="font-bold text-gray-900 flex items-center text-sm">
-            <TrendingDown size={18} className="text-[#5B8C5A] mr-2" />
+            <TrendingDown size={18} className="text-[#6B3FA0] mr-2" />
             Milestone Progress
           </h3>
-          <span className="text-xs font-bold text-[#5B8C5A]">
+          <span className="text-xs font-bold text-[#6B3FA0]">
             {lostSoFar > 0 ? `-${lostSoFar.toFixed(1)} lbs` : '0 lbs'}
           </span>
         </div>
 
         <div className="relative w-full h-3 bg-gray-100 rounded-full mb-2 overflow-hidden">
           <div
-            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#5B8C5A] to-[#7BAF7A] rounded-full transition-all duration-1000 ease-out"
+            className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#6B3FA0] to-[#7BAF7A] rounded-full transition-all duration-1000 ease-out"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
@@ -158,7 +158,7 @@ const ProgressTracker = () => {
       </div>
 
       <div className="bg-gradient-to-br from-[#2D2D2D] to-[#1a1a1a] rounded-2xl shadow-lg p-5 mb-5 text-white relative overflow-hidden">
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-10"></div>
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#D4874D] rounded-full blur-3xl opacity-10"></div>
 
         <div className="relative z-10">
           <h3 className="font-bold text-lg mb-1">Log Today's Weight</h3>
@@ -171,11 +171,11 @@ const ProgressTracker = () => {
               value={currentWeight}
               onChange={(e) => setCurrentWeight(e.target.value)}
               placeholder="Enter weight..."
-              className="flex-1 bg-white/10 border border-white/10 text-white placeholder-gray-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#D4A574] font-medium"
+              className="flex-1 bg-white/10 border border-white/10 text-white placeholder-gray-500 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#D4874D] font-medium"
             />
             <button
               type="submit"
-              className="bg-[#D4A574] text-white font-bold px-6 rounded-xl hover:bg-[#C49564] transition-colors"
+              className="bg-[#D4874D] text-white font-bold px-6 rounded-xl hover:bg-[#C49564] transition-colors"
             >
               Log
             </button>
@@ -185,7 +185,7 @@ const ProgressTracker = () => {
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
         <h3 className="font-bold text-gray-900 flex items-center text-sm mb-1">
-          <Camera size={18} className="text-[#D4A574] mr-2" />
+          <Camera size={18} className="text-[#D4874D] mr-2" />
           Transformation Gallery
         </h3>
         <p className="text-xs text-gray-500 mb-4">

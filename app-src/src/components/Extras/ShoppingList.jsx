@@ -79,7 +79,7 @@ const ShoppingList = () => {
         </div>
       ))}
 
-      <div className="bg-[#F5E6D3] rounded-2xl p-5 border border-[#D4A574]/20 text-center">
+      <div className="bg-[#FEF0E4] rounded-2xl p-5 border border-[#D4874D]/20 text-center">
         <p className="text-sm text-gray-700 font-medium mb-1">💡 Budget-Friendly Tip</p>
         <p className="text-xs text-gray-600 leading-relaxed">
           Most items cost $3-8 and last the full 30 days. Total investment is typically $30-50 — about $1-2/day. Many women spend LESS on groceries overall as cravings decrease!

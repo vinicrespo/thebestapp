@@ -82,7 +82,7 @@ const Dashboard = () => {
       <Confetti show={showConfetti} onComplete={() => setShowConfetti(false)} />
 
       {/* Top Bar — Updated Weekly */}
-      <div className="bg-gradient-to-r from-[#5B8C5A] to-[#4A7A49] px-4 py-2.5 flex items-center justify-center space-x-2">
+      <div className="bg-gradient-to-r from-[#6B3FA0] to-[#5A2E8E] px-4 py-2.5 flex items-center justify-center space-x-2">
         <RefreshCw size={13} className="text-white/80" />
         <p className="text-[11px] text-white font-semibold tracking-wide">App updated weekly with new content & features</p>
       </div>
@@ -93,7 +93,7 @@ const Dashboard = () => {
             <div className="text-5xl mb-3">{newBadge.icon}</div>
             <h3 className="font-bold text-xl text-gray-900 mb-1">{newBadge.title}</h3>
             <p className="text-sm text-gray-500">{newBadge.desc}</p>
-            <p className="text-xs text-[#5B8C5A] font-semibold mt-4">New badge unlocked!</p>
+            <p className="text-xs text-[#6B3FA0] font-semibold mt-4">New badge unlocked!</p>
           </div>
         </div>
       )}
@@ -107,8 +107,8 @@ const Dashboard = () => {
               <button onClick={() => setShowHelp(false)} className="p-1 rounded-full hover:bg-gray-100"><X size={20} className="text-gray-400" /></button>
             </div>
             <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
-              <div className="bg-[#E8F0E9] rounded-xl p-4">
-                <h3 className="font-bold text-[#5B8C5A] mb-1">Step 1: Start with Day 1</h3>
+              <div className="bg-[#F0ECF9] rounded-xl p-4">
+                <h3 className="font-bold text-[#6B3FA0] mb-1">Step 1: Start with Day 1</h3>
                 <p>Your <strong>30-Day Calendar</strong> is your main protocol. Each day has a unique alkaline shot recipe and health tip. Follow it in order — Day 1, Day 2, etc.</p>
               </div>
               <div className="bg-blue-50 rounded-xl p-4">
@@ -128,7 +128,7 @@ const Dashboard = () => {
                 <p>This app is <strong>updated weekly</strong> with new recipes, tips, challenges, and features. Keep checking back — there's always something new!</p>
               </div>
             </div>
-            <button onClick={() => setShowHelp(false)} className="w-full mt-4 bg-[#5B8C5A] text-white font-semibold py-3 rounded-xl">Got it!</button>
+            <button onClick={() => setShowHelp(false)} className="w-full mt-4 bg-[#6B3FA0] text-white font-semibold py-3 rounded-xl">Got it!</button>
           </div>
         </div>
       )}
@@ -155,7 +155,7 @@ const Dashboard = () => {
       </div>
 
       {/* START HERE — Getting Started Card */}
-      <div className="bg-gradient-to-br from-[#5B8C5A] to-[#3D6B3D] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
+      <div className="bg-gradient-to-br from-[#6B3FA0] to-[#4A2580] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-3xl opacity-5 -mr-10 -mt-10" />
         <div className="relative z-10">
           <div className="flex items-center space-x-2 mb-2">
@@ -170,7 +170,7 @@ const Dashboard = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-bold text-gray-900 text-sm">Your Phase</h3>
-          <span className="text-xs font-bold text-[#5B8C5A]">{completedCount}/30 days</span>
+          <span className="text-xs font-bold text-[#6B3FA0]">{completedCount}/30 days</span>
         </div>
         <div className="flex space-x-1.5 mb-3">
           {PHASES.map((phase, i) => {
@@ -208,7 +208,7 @@ const Dashboard = () => {
           className="w-full p-5 flex justify-between items-center"
         >
           <h3 className="font-bold text-gray-900 flex items-center text-sm">
-            <CalendarIcon size={16} className="text-[#5B8C5A] mr-2" />
+            <CalendarIcon size={16} className="text-[#6B3FA0] mr-2" />
             30-Day Calendar
           </h3>
           <div className="flex items-center space-x-2">
@@ -227,9 +227,9 @@ const Dashboard = () => {
                     key={i}
                     onClick={() => setSelectedDay(i)}
                     className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                      isCompleted && isSelected ? 'bg-[#5B8C5A] text-white ring-3 ring-[#5B8C5A]/20' :
-                      isCompleted ? 'bg-[#5B8C5A] text-white' :
-                      isSelected ? 'bg-white border-2 border-[#D4A574] text-[#D4A574] ring-3 ring-[#D4A574]/10' :
+                      isCompleted && isSelected ? 'bg-[#6B3FA0] text-white ring-3 ring-[#6B3FA0]/20' :
+                      isCompleted ? 'bg-[#6B3FA0] text-white' :
+                      isSelected ? 'bg-white border-2 border-[#D4874D] text-[#D4874D] ring-3 ring-[#D4874D]/10' :
                       'bg-gray-50 text-gray-400 hover:bg-gray-100'
                     }`}
                   >
@@ -251,7 +251,7 @@ const Dashboard = () => {
           </span>
         </div>
 
-        <div className="bg-[#FAFAF7] rounded-xl p-4 mb-4 border border-gray-100">
+        <div className="bg-[#F9F7FC] rounded-xl p-4 mb-4 border border-gray-100">
           <p className="text-sm font-semibold text-gray-800 leading-relaxed">
             {protocol.recipe}
           </p>
@@ -259,7 +259,7 @@ const Dashboard = () => {
 
         <div className="mb-5">
           <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Today's Tip</h3>
-          <p className="text-sm text-gray-600 leading-relaxed border-l-2 border-[#D4A574] pl-3">
+          <p className="text-sm text-gray-600 leading-relaxed border-l-2 border-[#D4874D] pl-3">
             {protocol.tip}
           </p>
         </div>
@@ -268,8 +268,8 @@ const Dashboard = () => {
           onClick={handleToggleShot}
           className={`w-full py-4 rounded-xl flex items-center justify-center space-x-2 font-semibold transition-all ${
             isSelectedDayCompleted
-              ? 'bg-[#E8F0E9] text-[#5B8C5A] border border-[#5B8C5A]/20'
-              : 'bg-[#5B8C5A] text-white shadow-lg shadow-[#5B8C5A]/20 hover:bg-[#4A7A49]'
+              ? 'bg-[#F0ECF9] text-[#6B3FA0] border border-[#6B3FA0]/20'
+              : 'bg-[#6B3FA0] text-white shadow-lg shadow-[#6B3FA0]/20 hover:bg-[#5A2E8E]'
           }`}
         >
           {isSelectedDayCompleted ? <CheckCircle2 size={20} /> : <Circle size={20} />}
@@ -322,11 +322,11 @@ const Dashboard = () => {
               key={h.id}
               onClick={() => handleHabitToggle(h.id)}
               className={`p-3.5 rounded-xl flex flex-col items-center justify-center space-y-1.5 border-2 transition-all ${
-                progress.dailyHabits?.[h.id] ? 'bg-[#E8F0E9] border-[#5B8C5A]/30' : 'bg-gray-50 border-transparent'
+                progress.dailyHabits?.[h.id] ? 'bg-[#F0ECF9] border-[#6B3FA0]/30' : 'bg-gray-50 border-transparent'
               }`}
             >
-              <span className={progress.dailyHabits?.[h.id] ? 'text-[#5B8C5A]' : h.color}>{h.icon}</span>
-              <span className={`text-[10px] font-bold ${progress.dailyHabits?.[h.id] ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{h.label}</span>
+              <span className={progress.dailyHabits?.[h.id] ? 'text-[#6B3FA0]' : h.color}>{h.icon}</span>
+              <span className={`text-[10px] font-bold ${progress.dailyHabits?.[h.id] ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{h.label}</span>
             </button>
           ))}
         </div>
@@ -335,11 +335,11 @@ const Dashboard = () => {
       {/* Weekly Summary */}
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
         <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
-          <CalendarIcon size={16} className="text-[#5B8C5A] mr-2" /> Weekly Summary
+          <CalendarIcon size={16} className="text-[#6B3FA0] mr-2" /> Weekly Summary
         </h3>
         <div className="grid grid-cols-4 gap-2">
-          <div className="text-center p-2 bg-[#E8F0E9] rounded-xl">
-            <p className="text-lg font-black text-[#5B8C5A]">{completedCount}</p>
+          <div className="text-center p-2 bg-[#F0ECF9] rounded-xl">
+            <p className="text-lg font-black text-[#6B3FA0]">{completedCount}</p>
             <p className="text-[9px] text-gray-500 font-bold">Days Done</p>
           </div>
           <div className="text-center p-2 bg-orange-50 rounded-xl">
@@ -358,7 +358,7 @@ const Dashboard = () => {
       </div>
 
       {/* Motivational Quote */}
-      <div className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-4 mb-5 border border-[#D4A574]/20">
+      <div className="bg-gradient-to-r from-[#FEF0E4] to-[#F0ECF9] rounded-2xl p-4 mb-5 border border-[#D4874D]/20">
         <p className="text-sm text-gray-700 italic leading-relaxed text-center">"{quote}"</p>
       </div>
 
@@ -422,16 +422,16 @@ const Dashboard = () => {
           onClick={() => navigate('/extended')}
           className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-4 text-left relative overflow-hidden border border-gray-800"
         >
-          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4A574] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
+          <div className="absolute top-0 right-0 w-32 h-32 bg-[#D4874D] rounded-full blur-3xl opacity-15 -mr-8 -mt-8" />
           <div className="relative z-10 flex items-center justify-between">
             <div>
               <div className="flex items-center space-x-2 mb-1">
-                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4A574] bg-[#D4A574]/10 px-2 py-0.5 rounded-full">180 Days</span>
+                <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4874D] bg-[#D4874D]/10 px-2 py-0.5 rounded-full">180 Days</span>
               </div>
               <h3 className="font-bold text-white text-sm">Extended Protocol</h3>
               <p className="text-[11px] text-gray-400 mt-0.5">Daily shots, recipes & challenges that never repeat.</p>
             </div>
-            <ArrowRight size={18} className="text-[#D4A574] flex-shrink-0 ml-3" />
+            <ArrowRight size={18} className="text-[#D4874D] flex-shrink-0 ml-3" />
           </div>
         </button>
 
@@ -455,9 +455,9 @@ const Dashboard = () => {
       </div>
 
       {/* Did You Know */}
-      <div className="bg-gradient-to-r from-[#E8F0E9] to-[#F5E6D3] rounded-2xl p-5 mb-5 border border-[#7C9A82]/20">
+      <div className="bg-gradient-to-r from-[#F0ECF9] to-[#FEF0E4] rounded-2xl p-5 mb-5 border border-[#8B6DB5]/20">
         <h3 className="font-bold text-gray-800 text-sm mb-2 flex items-center">
-          <Sparkles size={14} className="text-[#D4A574] mr-1.5" /> Did You Know?
+          <Sparkles size={14} className="text-[#D4874D] mr-1.5" /> Did You Know?
         </h3>
         <p className="text-sm text-gray-700 leading-relaxed">{didYouKnow}</p>
       </div>
@@ -486,14 +486,14 @@ const Dashboard = () => {
       {progress.badges && progress.badges.length > 0 && (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 mb-5">
           <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
-            <Award size={16} className="text-[#D4A574] mr-2" /> Your Badges
+            <Award size={16} className="text-[#D4874D] mr-2" /> Your Badges
           </h3>
           <div className="flex flex-wrap gap-2">
             {progress.badges.map(id => {
               const badge = BADGES[id];
               if (!badge) return null;
               return (
-                <div key={id} className="bg-gradient-to-r from-[#F5E6D3] to-[#E8F0E9] px-3 py-2 rounded-xl flex items-center space-x-2 border border-[#D4A574]/20">
+                <div key={id} className="bg-gradient-to-r from-[#FEF0E4] to-[#F0ECF9] px-3 py-2 rounded-xl flex items-center space-x-2 border border-[#D4874D]/20">
                   <span className="text-lg">{badge.icon}</span>
                   <span className="text-xs font-bold text-gray-700">{badge.title}</span>
                 </div>

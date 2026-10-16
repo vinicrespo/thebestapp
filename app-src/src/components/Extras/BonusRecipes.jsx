@@ -62,7 +62,7 @@ const BonusRecipes = () => {
                 <ul className="space-y-1.5 mb-4">
                   {recipe.ingredients.map((ing, i) => (
                     <li key={i} className="flex items-start space-x-2 text-sm text-gray-700">
-                      <span className="text-[#5B8C5A] mt-0.5">•</span>
+                      <span className="text-[#6B3FA0] mt-0.5">•</span>
                       <span>{ing}</span>
                     </li>
                   ))}
@@ -73,9 +73,9 @@ const BonusRecipes = () => {
                   {recipe.instructions}
                 </p>
 
-                <div className="flex items-start space-x-2 bg-[#E8F0E9] p-3 rounded-xl">
-                  <Lightbulb size={16} className="text-[#5B8C5A] mt-0.5 flex-shrink-0" />
-                  <p className="text-xs text-[#3D6B3D] leading-relaxed">{recipe.tip}</p>
+                <div className="flex items-start space-x-2 bg-[#F0ECF9] p-3 rounded-xl">
+                  <Lightbulb size={16} className="text-[#6B3FA0] mt-0.5 flex-shrink-0" />
+                  <p className="text-xs text-[#4A2580] leading-relaxed">{recipe.tip}</p>
                 </div>
               </div>
             )}

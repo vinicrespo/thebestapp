@@ -98,12 +98,12 @@ const YearEndBonus = () => {
               const isActive = selectedDay >= ranges[i][0] && selectedDay <= ranges[i][1];
               const isDone = selectedDay > ranges[i][1];
               return (
-                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-red-200 bg-red-50' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-red-200 bg-red-50' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{month.icon}</span>
                   <div className="flex-1">
-                    <p className={`text-xs font-bold ${isActive ? 'text-red-600' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{month.name}</p>
+                    <p className={`text-xs font-bold ${isActive ? 'text-red-600' : isDone ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{month.name}</p>
                   </div>
-                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
+                  {isDone && <Check size={14} className="text-[#6B3FA0]" />}
                   {isActive && <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />}
                 </div>
               );
@@ -142,11 +142,11 @@ const YearEndBonus = () => {
             <Target size={18} className="text-red-500" />
             <h3 className="font-bold text-gray-900 text-sm">Today's Mission</h3>
           </div>
-          <button onClick={toggleDayComplete} className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${isDayComplete ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300 hover:border-[#5B8C5A]'}`}>
+          <button onClick={toggleDayComplete} className={`w-8 h-8 rounded-full border-2 flex items-center justify-center transition-all ${isDayComplete ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300 hover:border-[#6B3FA0]'}`}>
             {isDayComplete && <Check size={16} className="text-white" />}
           </button>
         </div>
-        <div className={`p-4 rounded-xl border-2 ${isDayComplete ? 'bg-[#E8F0E9] border-[#5B8C5A]/20' : 'bg-gray-50 border-gray-100'}`}>
+        <div className={`p-4 rounded-xl border-2 ${isDayComplete ? 'bg-[#F0ECF9] border-[#6B3FA0]/20' : 'bg-gray-50 border-gray-100'}`}>
           <div className="flex items-start space-x-3">
             <span className="text-2xl">{content.mission.icon}</span>
             <div>
@@ -158,7 +158,7 @@ const YearEndBonus = () => {
       </div>
 
       {/* Motivational Quote */}
-      <div className="bg-gradient-to-br from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-5 mb-4 border border-[#D4A574]/20">
+      <div className="bg-gradient-to-br from-[#FEF0E4] to-[#F0ECF9] rounded-2xl p-5 mb-4 border border-[#D4874D]/20">
         <div className="flex items-center space-x-2 mb-3">
           <Star size={18} className="text-amber-500" />
           <h3 className="font-bold text-gray-900 text-sm">Daily Motivation</h3>

@@ -358,7 +358,7 @@ const ChatBot = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 right-4 z-50 bg-[#5B8C5A] text-white p-4 rounded-full shadow-lg shadow-[#5B8C5A]/30 hover:bg-[#4A7A49] transition-all animate-scale-in"
+          className="fixed bottom-24 right-4 z-50 bg-[#6B3FA0] text-white p-4 rounded-full shadow-lg shadow-[#6B3FA0]/30 hover:bg-[#5A2E8E] transition-all animate-scale-in"
           aria-label="Open Help Chat"
         >
           <MessageCircle size={24} />
@@ -367,7 +367,7 @@ const ChatBot = () => {
 
       {isOpen && (
         <div className="fixed inset-0 z-[100] bg-white flex flex-col animate-slide-up max-w-md mx-auto">
-          <div className="bg-[#5B8C5A] text-white px-5 py-4 flex items-center justify-between flex-shrink-0">
+          <div className="bg-[#6B3FA0] text-white px-5 py-4 flex items-center justify-between flex-shrink-0">
             <div className="flex items-center space-x-3">
               <div className="w-9 h-9 bg-white/20 rounded-full flex items-center justify-center">
                 <MessageCircle size={18} />
@@ -388,7 +388,7 @@ const ChatBot = () => {
                 <div className={`max-w-[85%] ${msg.type === 'user' ? '' : ''}`}>
                   <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
                     msg.type === 'user'
-                      ? 'bg-[#5B8C5A] text-white rounded-br-md'
+                      ? 'bg-[#6B3FA0] text-white rounded-br-md'
                       : 'bg-white text-gray-700 shadow-sm border border-gray-100 rounded-bl-md'
                   }`}>
                     {msg.text}
@@ -399,7 +399,7 @@ const ChatBot = () => {
                         <button
                           key={j}
                           onClick={() => handleOption(opt)}
-                          className="w-full text-left px-3.5 py-2.5 bg-white rounded-xl border border-gray-200 text-sm text-gray-700 hover:border-[#5B8C5A] hover:text-[#5B8C5A] transition-colors flex items-center justify-between"
+                          className="w-full text-left px-3.5 py-2.5 bg-white rounded-xl border border-gray-200 text-sm text-gray-700 hover:border-[#6B3FA0] hover:text-[#6B3FA0] transition-colors flex items-center justify-between"
                         >
                           <span>{opt.label}</span>
                           <ChevronRight size={14} className="text-gray-300 flex-shrink-0" />
@@ -419,9 +419,9 @@ const ChatBot = () => {
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               placeholder="Type your question..."
-              className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-[#5B8C5A]"
+              className="flex-1 bg-gray-50 border border-gray-200 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:border-[#6B3FA0]"
             />
-            <button type="submit" className="bg-[#5B8C5A] text-white p-2.5 rounded-full hover:bg-[#4A7A49] transition-colors flex-shrink-0">
+            <button type="submit" className="bg-[#6B3FA0] text-white p-2.5 rounded-full hover:bg-[#5A2E8E] transition-colors flex-shrink-0">
               <Send size={16} />
             </button>
           </form>

@@ -52,7 +52,7 @@ const App = () => {
 
   return (
     <Router basename="/app">
-      <div className="min-h-screen bg-[#FAFAF7] flex flex-col max-w-md mx-auto shadow-xl relative">
+      <div className="min-h-screen bg-[#F9F7FC] flex flex-col max-w-md mx-auto shadow-xl relative">
         <div className="flex-1 overflow-y-auto pb-20">
           <Routes>
             {!isAuthenticated ? (

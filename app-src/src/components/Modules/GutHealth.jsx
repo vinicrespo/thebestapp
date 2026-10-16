@@ -99,13 +99,13 @@ const GutHealth = () => {
               const isActive = selectedDay >= ranges[i][0] && selectedDay <= ranges[i][1];
               const isDone = selectedDay > ranges[i][1];
               return (
-                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-orange-300/30 bg-orange-50' : isDone ? 'border-[#5B8C5A]/20 bg-[#E8F0E9]/30' : 'border-gray-100 bg-gray-50'}`}>
+                <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-orange-300/30 bg-orange-50' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{phase.icon}</span>
                   <div className="flex-1">
-                    <p className={`text-xs font-bold ${isActive ? 'text-orange-600' : isDone ? 'text-[#5B8C5A]' : 'text-gray-500'}`}>{phase.name}</p>
+                    <p className={`text-xs font-bold ${isActive ? 'text-orange-600' : isDone ? 'text-[#6B3FA0]' : 'text-gray-500'}`}>{phase.name}</p>
                     <p className="text-[10px] text-gray-400">{phase.range}</p>
                   </div>
-                  {isDone && <Check size={14} className="text-[#5B8C5A]" />}
+                  {isDone && <Check size={14} className="text-[#6B3FA0]" />}
                   {isActive && <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />}
                 </div>
               );
@@ -133,21 +133,21 @@ const GutHealth = () => {
           <span className="text-xs font-bold text-gray-400">{taskCount}/4</span>
         </div>
         <div className="w-full bg-gray-100 rounded-full h-2">
-          <div className="bg-[#5B8C5A] h-2 rounded-full transition-all duration-500" style={{ width: `${(taskCount / 4) * 100}%` }} />
+          <div className="bg-[#6B3FA0] h-2 rounded-full transition-all duration-500" style={{ width: `${(taskCount / 4) * 100}%` }} />
         </div>
       </div>
 
-      <div className="bg-gradient-to-br from-[#F5E6D3] to-[#E8F0E9] rounded-2xl p-5 mb-4 border border-[#D4A574]/20">
+      <div className="bg-gradient-to-br from-[#FEF0E4] to-[#F0ECF9] rounded-2xl p-5 mb-4 border border-[#D4874D]/20">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center space-x-2">
-            <Droplets size={18} className="text-[#D4A574]" />
+            <Droplets size={18} className="text-[#D4874D]" />
             <h3 className="font-bold text-gray-900 text-sm">Morning Protocol</h3>
           </div>
-          <button onClick={() => toggleTask('morning')} className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${completedTasks.morning ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+          <button onClick={() => toggleTask('morning')} className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${completedTasks.morning ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
             {completedTasks.morning && <Check size={14} className="text-white" />}
           </button>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4A574]/10">{content.morningProtocol}</p>
+        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4874D]/10">{content.morningProtocol}</p>
       </div>
 
       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 mb-4 border border-indigo-200/30">
@@ -156,7 +156,7 @@ const GutHealth = () => {
             <Moon size={18} className="text-indigo-500" />
             <h3 className="font-bold text-gray-900 text-sm">Evening Protocol</h3>
           </div>
-          <button onClick={() => toggleTask('evening')} className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${completedTasks.evening ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+          <button onClick={() => toggleTask('evening')} className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${completedTasks.evening ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
             {completedTasks.evening && <Check size={14} className="text-white" />}
           </button>
         </div>
@@ -166,14 +166,14 @@ const GutHealth = () => {
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">
         <button onClick={() => setActiveSection(activeSection === 'recipe' ? null : 'recipe')} className="w-full p-5 flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <UtensilsCrossed size={18} className="text-[#5B8C5A]" />
+            <UtensilsCrossed size={18} className="text-[#6B3FA0]" />
             <div className="text-left">
               <h3 className="font-bold text-gray-900 text-sm">{content.recipe.title}</h3>
               <p className="text-[10px] text-gray-400 font-bold uppercase">{content.recipe.category} · {content.recipe.time}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <button onClick={(e) => { e.stopPropagation(); toggleTask('recipe'); }} className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedTasks.recipe ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+            <button onClick={(e) => { e.stopPropagation(); toggleTask('recipe'); }} className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedTasks.recipe ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
               {completedTasks.recipe && <Check size={12} className="text-white" />}
             </button>
             {activeSection === 'recipe' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}
@@ -196,7 +196,7 @@ const GutHealth = () => {
             </div>
           </div>
           <div className="flex items-center space-x-2">
-            <button onClick={(e) => { e.stopPropagation(); toggleTask('exercise'); }} className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedTasks.exercise ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'}`}>
+            <button onClick={(e) => { e.stopPropagation(); toggleTask('exercise'); }} className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${completedTasks.exercise ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'}`}>
               {completedTasks.exercise && <Check size={12} className="text-white" />}
             </button>
             {activeSection === 'exercise' ? <ChevronUp size={16} className="text-gray-400" /> : <ChevronDown size={16} className="text-gray-400" />}

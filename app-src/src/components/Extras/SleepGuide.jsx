@@ -162,7 +162,7 @@ const SleepGuide = () => {
                 selectedNight === i
                   ? 'bg-indigo-500 text-white'
                   : allDone
-                  ? 'bg-[#E8F0E9] text-[#5B8C5A] border border-[#5B8C5A]/20'
+                  ? 'bg-[#F0ECF9] text-[#6B3FA0] border border-[#6B3FA0]/20'
                   : 'bg-gray-50 text-gray-500 border border-gray-100'
               }`}
             >

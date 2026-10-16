@@ -51,12 +51,12 @@ const Onboarding = ({ onComplete }) => {
     : formData.age && formData.weight;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#E8F0E9] p-6">
+    <div className="min-h-screen bg-gradient-to-b from-white to-[#F0ECF9] p-6">
       <div className="pt-8 pb-6">
         <div className="flex items-center space-x-2 mb-6">
-          <div className={`h-1.5 flex-1 rounded-full ${step >= 1 ? 'bg-[#5B8C5A]' : 'bg-gray-200'}`} />
-          <div className={`h-1.5 flex-1 rounded-full ${step >= 2 ? 'bg-[#5B8C5A]' : 'bg-gray-200'}`} />
-          <div className={`h-1.5 flex-1 rounded-full ${step >= 3 ? 'bg-[#5B8C5A]' : 'bg-gray-200'}`} />
+          <div className={`h-1.5 flex-1 rounded-full ${step >= 1 ? 'bg-[#6B3FA0]' : 'bg-gray-200'}`} />
+          <div className={`h-1.5 flex-1 rounded-full ${step >= 2 ? 'bg-[#6B3FA0]' : 'bg-gray-200'}`} />
+          <div className={`h-1.5 flex-1 rounded-full ${step >= 3 ? 'bg-[#6B3FA0]' : 'bg-gray-200'}`} />
         </div>
 
         {step === 1 && (
@@ -70,7 +70,7 @@ const Onboarding = ({ onComplete }) => {
                 value={formData.name}
                 onChange={(e) => setFormData({...formData, name: e.target.value})}
                 placeholder="Your first name"
-                className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#5B8C5A] outline-none text-base"
+                className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none text-base"
                 autoFocus
               />
             </div>
@@ -80,7 +80,7 @@ const Onboarding = ({ onComplete }) => {
               disabled={!canProceed}
               className={`w-full py-3.5 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all ${
                 canProceed
-                  ? 'bg-[#5B8C5A] text-white shadow-lg shadow-[#5B8C5A]/20 hover:bg-[#4A7A49]'
+                  ? 'bg-[#6B3FA0] text-white shadow-lg shadow-[#6B3FA0]/20 hover:bg-[#5A2E8E]'
                   : 'bg-gray-200 text-gray-400'
               }`}
             >
@@ -104,7 +104,7 @@ const Onboarding = ({ onComplete }) => {
                   onChange={(e) => setFormData({...formData, age: e.target.value})}
                   placeholder="e.g. 48"
                   required
-                  className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#5B8C5A] outline-none"
+                  className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none"
                 />
               </div>
               <div className="flex space-x-3">
@@ -116,7 +116,7 @@ const Onboarding = ({ onComplete }) => {
                     onChange={(e) => setFormData({...formData, weight: e.target.value})}
                     placeholder="e.g. 185"
                     required
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#5B8C5A] outline-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none"
                   />
                 </div>
                 <div className="flex-1">
@@ -126,7 +126,7 @@ const Onboarding = ({ onComplete }) => {
                     value={formData.goalWeight}
                     onChange={(e) => setFormData({...formData, goalWeight: e.target.value})}
                     placeholder="e.g. 145"
-                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#5B8C5A] outline-none"
+                    className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none"
                   />
                 </div>
               </div>
@@ -141,7 +141,7 @@ const Onboarding = ({ onComplete }) => {
                 disabled={!canProceed}
                 className={`flex-1 py-3.5 rounded-xl font-semibold flex items-center justify-center space-x-2 transition-all ${
                   canProceed
-                    ? 'bg-[#5B8C5A] text-white shadow-lg shadow-[#5B8C5A]/20 hover:bg-[#4A7A49]'
+                    ? 'bg-[#6B3FA0] text-white shadow-lg shadow-[#6B3FA0]/20 hover:bg-[#5A2E8E]'
                     : 'bg-gray-200 text-gray-400'
                 }`}
               >
@@ -169,18 +169,18 @@ const Onboarding = ({ onComplete }) => {
                   onClick={() => toggleFlag(item.id)}
                   className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${
                     formData.healthFlags[item.id]
-                      ? 'border-[#5B8C5A] bg-[#E8F0E9]'
+                      ? 'border-[#6B3FA0] bg-[#F0ECF9]'
                       : 'border-gray-100 bg-white hover:border-gray-200'
                   }`}
                 >
                   <div className="flex items-center space-x-3">
                     <span className="text-lg">{item.emoji}</span>
-                    <span className={`font-medium ${formData.healthFlags[item.id] ? 'text-[#3D6B3D]' : 'text-gray-700'}`}>
+                    <span className={`font-medium ${formData.healthFlags[item.id] ? 'text-[#4A2580]' : 'text-gray-700'}`}>
                       {item.label}
                     </span>
                   </div>
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
-                    formData.healthFlags[item.id] ? 'bg-[#5B8C5A] border-[#5B8C5A]' : 'border-gray-300'
+                    formData.healthFlags[item.id] ? 'bg-[#6B3FA0] border-[#6B3FA0]' : 'border-gray-300'
                   }`}>
                     {formData.healthFlags[item.id] && <div className="w-2 h-2 bg-white rounded-full" />}
                   </div>
@@ -196,7 +196,7 @@ const Onboarding = ({ onComplete }) => {
               </button>
               <button
                 type="submit"
-                className="flex-1 bg-[#5B8C5A] text-white font-semibold py-4 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#4A7A49] transition-colors shadow-lg shadow-[#5B8C5A]/20"
+                className="flex-1 bg-[#6B3FA0] text-white font-semibold py-4 rounded-xl flex items-center justify-center space-x-2 hover:bg-[#5A2E8E] transition-colors shadow-lg shadow-[#6B3FA0]/20"
               >
                 <Heart size={18} />
                 <span>Start My Journey</span>
