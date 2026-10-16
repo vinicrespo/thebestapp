@@ -14,14 +14,12 @@ import BonusRecipes from './components/Extras/BonusRecipes';
 import SleepGuide from './components/Extras/SleepGuide';
 import Journal from './components/Extras/Journal';
 import BottomNav from './components/Layout/BottomNav';
-import Welcome from './components/Welcome';
 import ChatBot from './components/ChatBot';
-import { getProfile, hasSeenWelcome, markWelcomeSeen } from './utils/storage';
+import { getProfile } from './utils/storage';
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [hasProfile, setHasProfile] = useState(false);
-  const [showWelcome, setShowWelcome] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,18 +34,6 @@ const App = () => {
     setLoading(false);
   }, []);
 
-  const handleOnboardingComplete = () => {
-    setHasProfile(true);
-    if (!hasSeenWelcome()) {
-      setShowWelcome(true);
-    }
-  };
-
-  const handleDismissWelcome = () => {
-    markWelcomeSeen();
-    setShowWelcome(false);
-  };
-
   if (loading) return null;
 
   return (
@@ -58,7 +44,7 @@ const App = () => {
             {!isAuthenticated ? (
               <Route path="*" element={<Auth onLogin={() => setIsAuthenticated(true)} />} />
             ) : !hasProfile ? (
-              <Route path="*" element={<Onboarding onComplete={handleOnboardingComplete} />} />
+              <Route path="*" element={<Onboarding onComplete={() => setHasProfile(true)} />} />
             ) : (
               <>
                 <Route path="/" element={<Dashboard />} />
@@ -79,7 +65,6 @@ const App = () => {
         </div>
         {isAuthenticated && hasProfile && <BottomNav />}
         {isAuthenticated && hasProfile && <ChatBot />}
-        {showWelcome && <Welcome onDismiss={handleDismissWelcome} />}
       </div>
     </Router>
   );
