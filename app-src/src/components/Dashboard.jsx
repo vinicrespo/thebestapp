@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -15,6 +15,9 @@ const Dashboard = () => {
   const [newBadge, setNewBadge] = useState(null);
   const [showCalendar, setShowCalendar] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
+  const [dismissedUpdates, setDismissedUpdates] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('alkalean_dismissed_updates') || '[]'); } catch { return []; }
+  });
 
   useEffect(() => {
     const prof = getProfile();
@@ -72,6 +75,27 @@ const Dashboard = () => {
   const displayName = profile.name ? profile.name.split(' ')[0] : '';
   const hour = new Date().getHours();
   const greeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
+
+  const APP_UPDATES = [
+    {
+      id: 'extended-180',
+      date: 'Oct 19',
+      tag: 'NEW',
+      tagColor: 'bg-emerald-100 text-emerald-700',
+      title: '180-Day Extended Protocol',
+      desc: 'A full 6-month protocol with daily alkaline shots, recipes, and challenges that never repeat. Your longest transformation journey yet.',
+      action: () => navigate('/extended'),
+      actionLabel: 'Explore Now',
+    },
+  ];
+
+  const visibleUpdates = APP_UPDATES.filter(u => !dismissedUpdates.includes(u.id));
+
+  const dismissUpdate = (id) => {
+    const next = [...dismissedUpdates, id];
+    setDismissedUpdates(next);
+    localStorage.setItem('alkalean_dismissed_updates', JSON.stringify(next));
+  };
 
   const hasGut = true;
   const hasHormones = true;
@@ -153,6 +177,42 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
+      {/* What's New */}
+      {visibleUpdates.length > 0 && (
+        <div className="mb-5">
+          <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
+            <Megaphone size={16} className="text-[#6B3FA0] mr-2" /> What's New
+          </h3>
+          <div className="space-y-3">
+            {visibleUpdates.map(update => (
+              <div key={update.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#6B3FA0] to-[#D4874D]" />
+                <div className="pl-3">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="flex items-center space-x-2">
+                      <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${update.tagColor}`}>{update.tag}</span>
+                      <span className="text-[10px] text-gray-400 font-medium">{update.date}</span>
+                    </div>
+                    <button onClick={() => dismissUpdate(update.id)} className="p-1 rounded-full hover:bg-gray-100 transition-all">
+                      <X size={14} className="text-gray-300" />
+                    </button>
+                  </div>
+                  <h4 className="font-bold text-gray-900 text-sm mb-1">{update.title}</h4>
+                  <p className="text-xs text-gray-500 leading-relaxed mb-3">{update.desc}</p>
+                  <button
+                    onClick={update.action}
+                    className="flex items-center space-x-1.5 text-xs font-bold text-[#6B3FA0] hover:text-[#5A2E8E] transition-colors"
+                  >
+                    <span>{update.actionLabel}</span>
+                    <ArrowRight size={13} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* START HERE — Getting Started Card */}
       <div className="bg-gradient-to-br from-[#6B3FA0] to-[#4A2580] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
