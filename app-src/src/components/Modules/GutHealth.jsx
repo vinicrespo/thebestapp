@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getGutDayContent, GUT_PHASE_LIST, GI_SYMPTOMS } from '../../utils/gutProtocol';
+import { getUnits, convertRecipeUnits } from '../../utils/storage';
 import { ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Droplets, Moon, UtensilsCrossed, Lightbulb, Dumbbell, Check, Activity } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -147,7 +148,7 @@ const GutHealth = () => {
             {completedTasks.morning && <Check size={14} className="text-white" />}
           </button>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4874D]/10">{content.morningProtocol}</p>
+        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4874D]/10">{convertRecipeUnits(content.morningProtocol, getUnits())}</p>
       </div>
 
       <div className="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-2xl p-5 mb-4 border border-indigo-200/30">
@@ -160,7 +161,7 @@ const GutHealth = () => {
             {completedTasks.evening && <Check size={14} className="text-white" />}
           </button>
         </div>
-        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-indigo-200/20">{content.eveningProtocol}</p>
+        <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-indigo-200/20">{convertRecipeUnits(content.eveningProtocol, getUnits())}</p>
       </div>
 
       <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-4">

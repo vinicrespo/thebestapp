@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { saveProfile, saveProgress } from '../utils/storage';
+import { saveProfile, saveProgress, setUnits } from '../utils/storage';
 import { ChevronRight, Heart } from 'lucide-react';
 
 const Onboarding = ({ onComplete }) => {
   const [step, setStep] = useState(1);
+  const [unitSystem, setUnitSystem] = useState('imperial');
   const [formData, setFormData] = useState({
     name: '',
     age: '',
@@ -21,7 +22,8 @@ const Onboarding = ({ onComplete }) => {
     e.preventDefault();
     if (!formData.age || !formData.weight) return;
 
-    saveProfile(formData);
+    setUnits(unitSystem);
+    saveProfile({ ...formData, unitSystem });
     saveProgress({
       currentDay: 1,
       streak: 0,
@@ -96,6 +98,27 @@ const Onboarding = ({ onComplete }) => {
             <p className="text-gray-500 text-sm mb-8">This helps us calculate your personalized dosages and protocol.</p>
 
             <div className="space-y-4 mb-6">
+              {/* Unit System Toggle */}
+              <div>
+                <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Unit System</label>
+                <div className="flex rounded-xl border border-gray-200 overflow-hidden">
+                  <button
+                    type="button"
+                    onClick={() => setUnitSystem('imperial')}
+                    className={`flex-1 py-3 text-sm font-semibold transition-all ${unitSystem === 'imperial' ? 'bg-[#6B3FA0] text-white' : 'bg-white text-gray-500'}`}
+                  >
+                    lbs / oz
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUnitSystem('metric')}
+                    className={`flex-1 py-3 text-sm font-semibold transition-all ${unitSystem === 'metric' ? 'bg-[#6B3FA0] text-white' : 'bg-white text-gray-500'}`}
+                  >
+                    kg / ml
+                  </button>
+                </div>
+              </div>
+
               <div>
                 <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Age</label>
                 <input
@@ -109,23 +132,23 @@ const Onboarding = ({ onComplete }) => {
               </div>
               <div className="flex space-x-3">
                 <div className="flex-1">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Current Weight (lbs)</label>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Current Weight ({unitSystem === 'metric' ? 'kg' : 'lbs'})</label>
                   <input
                     type="number"
                     value={formData.weight}
                     onChange={(e) => setFormData({...formData, weight: e.target.value})}
-                    placeholder="e.g. 185"
+                    placeholder={unitSystem === 'metric' ? 'e.g. 84' : 'e.g. 185'}
                     required
                     className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none"
                   />
                 </div>
                 <div className="flex-1">
-                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Goal Weight (lbs)</label>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase mb-1.5 tracking-wider">Goal Weight ({unitSystem === 'metric' ? 'kg' : 'lbs'})</label>
                   <input
                     type="number"
                     value={formData.goalWeight}
                     onChange={(e) => setFormData({...formData, goalWeight: e.target.value})}
-                    placeholder="e.g. 145"
+                    placeholder={unitSystem === 'metric' ? 'e.g. 66' : 'e.g. 145'}
                     className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:ring-2 focus:ring-[#6B3FA0] outline-none"
                   />
                 </div>

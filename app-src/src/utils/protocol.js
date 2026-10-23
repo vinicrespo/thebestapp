@@ -51,12 +51,14 @@ export const getDailyProtocol = (currentDay, profile) => {
     return { phase, recipe, tip };
 };
 
-export const getHormonalCalculator = (weight, age) => {
-    const baseDosage = weight > 160 ? 1.2 : 0.8;
+export const getHormonalCalculator = (weight, age, units = 'imperial') => {
+    const weightInLbs = units === 'metric' ? weight / 0.453592 : weight;
+    const baseDosage = weightInLbs > 160 ? 1.2 : 0.8;
     const ageMultiplier = age > 45 ? 1.5 : 1.1;
     const finalDose = (baseDosage * ageMultiplier).toFixed(1);
 
-    return `Based on your profile (Age: ${age}, Weight: ${weight} lbs), your optimal baseline for the Evening Tonic is ${finalDose} tsp of the natural adaptogen mix (Maca/Ashwagandha).`;
+    const displayW = units === 'metric' ? `${Number(weight).toFixed(1)} kg` : `${weight} lbs`;
+    return `Based on your profile (Age: ${age}, Weight: ${displayW}), your optimal baseline for the Evening Tonic is ${finalDose} tsp of the natural adaptogen mix (Maca/Ashwagandha).`;
 };
 
 export const getMotivationalQuote = () => {

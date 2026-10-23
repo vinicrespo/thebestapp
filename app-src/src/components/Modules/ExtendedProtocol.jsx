@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProgress } from '../../utils/storage';
+import { getProgress, getUnits, convertRecipeUnits } from '../../utils/storage';
 import { getExtendedDayContent, EXTENDED_PHASES } from '../../utils/extendedProtocol';
 import { ChevronLeft, ChevronRight, Flame, Droplets, Lightbulb, UtensilsCrossed, Target, Lock, Check, ChevronDown, ChevronUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -132,7 +132,7 @@ const ExtendedProtocol = () => {
           <h3 className="font-bold text-gray-900 text-sm">Morning Shot</h3>
         </div>
         <p className="text-sm text-gray-700 leading-relaxed bg-white/60 p-4 rounded-xl border border-[#D4874D]/10">
-          {content.shot}
+          {convertRecipeUnits(content.shot, getUnits())}
         </p>
       </div>
 

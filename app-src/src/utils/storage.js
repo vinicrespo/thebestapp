@@ -137,3 +137,31 @@ export const hasSeenWelcome = () => {
 export const markWelcomeSeen = () => {
     localStorage.setItem('alkalean_welcomed_' + getCurrentEmail(), 'true');
 };
+
+const UNITS_KEY = 'alkalean_units';
+
+export const getUnits = () => {
+    return localStorage.getItem(UNITS_KEY) || 'imperial';
+};
+
+export const setUnits = (system) => {
+    localStorage.setItem(UNITS_KEY, system);
+};
+
+export const lbsToKg = (lbs) => (lbs * 0.453592).toFixed(1);
+export const kgToLbs = (kg) => (kg / 0.453592).toFixed(1);
+export const ozToMl = (oz) => Math.round(oz * 29.5735);
+export const mlToOz = (ml) => (ml / 29.5735).toFixed(1);
+
+export const weightLabel = (system) => system === 'metric' ? 'kg' : 'lbs';
+export const volumeLabel = (system) => system === 'metric' ? 'ml' : 'oz';
+
+export const displayWeight = (lbs, system) => {
+    if (system === 'metric') return lbsToKg(lbs);
+    return Number(lbs).toFixed(1);
+};
+
+export const convertRecipeUnits = (text, system) => {
+    if (system !== 'metric') return text;
+    return text.replace(/(\d+(?:\.\d+)?)\s*oz\b/gi, (_, n) => `${ozToMl(Number(n))}ml`);
+};

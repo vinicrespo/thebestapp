@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProfile } from '../../utils/storage';
+import { getProfile, getUnits, displayWeight, weightLabel, lbsToKg, kgToLbs } from '../../utils/storage';
 import { Target, TrendingDown, Scale, Camera, Image as ImageIcon, ChevronLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -9,6 +9,8 @@ const ProgressTracker = () => {
   const [currentWeight, setCurrentWeight] = useState('');
   const [weightHistory, setWeightHistory] = useState([]);
   const [photos, setPhotos] = useState({ day1: null, current: null });
+  const units = getUnits();
+  const wLabel = weightLabel(units);
 
   useEffect(() => {
     const prof = getProfile();
@@ -106,14 +108,14 @@ const ProgressTracker = () => {
             <Scale size={20} />
           </div>
           <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Current</p>
-          <p className="text-2xl font-black text-gray-900">{latestWeight.toFixed(1)} <span className="text-xs font-normal text-gray-400">lbs</span></p>
+          <p className="text-2xl font-black text-gray-900">{latestWeight.toFixed(1)} <span className="text-xs font-normal text-gray-400">{wLabel}</span></p>
         </div>
         <div className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 flex flex-col items-center text-center">
           <div className="bg-[#FEF0E4] p-2.5 rounded-full text-[#D4874D] mb-2">
             <Target size={20} />
           </div>
           <p className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Goal</p>
-          <p className="text-2xl font-black text-gray-900">{goalWeight || '—'} <span className="text-xs font-normal text-gray-400">lbs</span></p>
+          <p className="text-2xl font-black text-gray-900">{goalWeight || '—'} <span className="text-xs font-normal text-gray-400">{wLabel}</span></p>
         </div>
       </div>
 
@@ -124,7 +126,7 @@ const ProgressTracker = () => {
             Milestone Progress
           </h3>
           <span className="text-xs font-bold text-[#6B3FA0]">
-            {lostSoFar > 0 ? `-${lostSoFar.toFixed(1)} lbs` : '0 lbs'}
+            {lostSoFar > 0 ? `-${lostSoFar.toFixed(1)} ${wLabel}` : `0 ${wLabel}`}
           </span>
         </div>
 
@@ -149,7 +151,7 @@ const ProgressTracker = () => {
                   <span className="text-gray-400">
                     {new Date(entry.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                   </span>
-                  <span className="font-bold text-gray-700">{entry.weight.toFixed(1)} lbs</span>
+                  <span className="font-bold text-gray-700">{entry.weight.toFixed(1)} {wLabel}</span>
                 </div>
               ))}
             </div>

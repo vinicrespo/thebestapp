@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration } from '../utils/storage';
+import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration, getUnits, setUnits, convertRecipeUnits } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
 import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +15,7 @@ const Dashboard = () => {
   const [newBadge, setNewBadge] = useState(null);
   const [showCalendar, setShowCalendar] = useState(true);
   const [showHelp, setShowHelp] = useState(false);
+  const units = getUnits();
   const [dismissedUpdates, setDismissedUpdates] = useState(() => {
     try { return JSON.parse(localStorage.getItem('alkalean_dismissed_updates') || '[]'); } catch { return []; }
   });
@@ -150,6 +151,24 @@ const Dashboard = () => {
               <div className="bg-rose-50 rounded-xl p-4">
                 <h3 className="font-bold text-rose-600 mb-1">New Content Every Week</h3>
                 <p>This app is <strong>updated weekly</strong> with new recipes, tips, challenges, and features. Keep checking back — there's always something new!</p>
+              </div>
+            </div>
+            {/* Unit Preference */}
+            <div className="mt-4 bg-gray-50 rounded-xl p-4 border border-gray-100">
+              <h3 className="font-bold text-gray-700 text-sm mb-2">Measurement Units</h3>
+              <div className="flex rounded-xl border border-gray-200 overflow-hidden">
+                <button
+                  onClick={() => { setUnits('imperial'); window.location.reload(); }}
+                  className={`flex-1 py-2.5 text-xs font-bold transition-all ${units === 'imperial' ? 'bg-[#6B3FA0] text-white' : 'bg-white text-gray-500'}`}
+                >
+                  lbs / oz
+                </button>
+                <button
+                  onClick={() => { setUnits('metric'); window.location.reload(); }}
+                  className={`flex-1 py-2.5 text-xs font-bold transition-all ${units === 'metric' ? 'bg-[#6B3FA0] text-white' : 'bg-white text-gray-500'}`}
+                >
+                  kg / ml
+                </button>
               </div>
             </div>
             <button onClick={() => setShowHelp(false)} className="w-full mt-4 bg-[#6B3FA0] text-white font-semibold py-3 rounded-xl">Got it!</button>
@@ -313,7 +332,7 @@ const Dashboard = () => {
 
         <div className="bg-[#F9F7FC] rounded-xl p-4 mb-4 border border-gray-100">
           <p className="text-sm font-semibold text-gray-800 leading-relaxed">
-            {protocol.recipe}
+            {convertRecipeUnits(protocol.recipe, units)}
           </p>
         </div>
 
@@ -374,7 +393,7 @@ const Dashboard = () => {
         </div>
         <div className="grid grid-cols-3 gap-2.5">
           {[
-            { id: 'water', label: '64oz Water', icon: <Droplets size={18} />, color: 'text-blue-500' },
+            { id: 'water', label: units === 'metric' ? '2L Water' : '64oz Water', icon: <Droplets size={18} />, color: 'text-blue-500' },
             { id: 'steps', label: '7K Steps', icon: <Activity size={18} />, color: 'text-green-500' },
             { id: 'supplements', label: 'Shot Taken', icon: <Heart size={18} />, color: 'text-rose-400' }
           ].map(h => (

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getProfile } from '../../utils/storage';
+import { getProfile, getUnits } from '../../utils/storage';
 import { getHormonalCalculator } from '../../utils/protocol';
 import { getHormonalDayContent, HORMONAL_CYCLES, SYMPTOM_CATEGORIES } from '../../utils/hormonalProtocol';
 import { Droplet, ChevronLeft, ChevronRight, ChevronDown, ChevronUp, Lightbulb, Check, Activity, BookOpen, UtensilsCrossed, ListChecks } from 'lucide-react';
@@ -78,7 +78,7 @@ const HormonalShot = () => {
               <h2 className="font-bold text-sm">Your Personalized Dosage</h2>
             </div>
             <p className="text-sm text-purple-200 leading-relaxed bg-white/10 p-3 rounded-xl">
-              {getHormonalCalculator(Number(profile.weight), Number(profile.age))}
+              {getHormonalCalculator(Number(profile.weight), Number(profile.age), getUnits())}
             </p>
           </div>
         </div>
