@@ -109,7 +109,7 @@ const Dashboard = () => {
       {/* Top Bar — Updated Weekly */}
       <div className="bg-gradient-to-r from-[#6B3FA0] to-[#5A2E8E] px-4 py-2.5 flex items-center justify-center space-x-2">
         <RefreshCw size={13} className="text-white/80" />
-        <p className="text-[11px] text-white font-semibold tracking-wide">App updated weekly with new content & features</p>
+        <p className="text-[11px] text-white font-semibold tracking-wide">New updates being validated by specialists</p>
       </div>
 
       {newBadge && (
