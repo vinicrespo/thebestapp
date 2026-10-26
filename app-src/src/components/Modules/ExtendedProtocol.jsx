@@ -1,12 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { getProgress, getUnits, convertRecipeUnits } from '../../utils/storage';
 import { getExtendedDayContent, EXTENDED_PHASES } from '../../utils/extendedProtocol';
-import { ChevronLeft, ChevronRight, Flame, Droplets, Lightbulb, UtensilsCrossed, Target, Lock, Check, ChevronDown, ChevronUp } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Flame, Droplets, Lightbulb, UtensilsCrossed, Target, Lock, Check, ChevronDown, ChevronUp, CheckCircle2, Circle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+
+const EXT_PROGRESS_KEY = 'alkalean_extended_progress';
+
+const getExtProgress = () => {
+  try { return JSON.parse(localStorage.getItem(EXT_PROGRESS_KEY)) || { completedDays: [], lastDay: 31 }; }
+  catch { return { completedDays: [], lastDay: 31 }; }
+};
+
+const saveExtProgress = (data) => localStorage.setItem(EXT_PROGRESS_KEY, JSON.stringify(data));
 
 const ExtendedProtocol = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(null);
+  const [extProgress, setExtProgress] = useState(getExtProgress());
   const [selectedDay, setSelectedDay] = useState(31);
   const [showPhases, setShowPhases] = useState(false);
   const [activeSection, setActiveSection] = useState(null);
@@ -14,8 +24,9 @@ const ExtendedProtocol = () => {
   useEffect(() => {
     const prog = getProgress();
     setProgress(prog);
-    const completed = prog?.completedDays?.length || 0;
-    setSelectedDay(Math.max(31, Math.min(completed + 1, 210)));
+    const ext = getExtProgress();
+    setExtProgress(ext);
+    setSelectedDay(ext.lastDay || Math.max(31, Math.min((prog?.completedDays?.length || 0) + 1, 210)));
   }, []);
 
   if (!progress) return null;
@@ -25,8 +36,35 @@ const ExtendedProtocol = () => {
   const content = getExtendedDayContent(selectedDay);
   const overallProgress = Math.max(0, completedCount - 30);
 
-  const handlePrevDay = () => setSelectedDay(d => Math.max(31, d - 1));
-  const handleNextDay = () => setSelectedDay(d => Math.min(210, d + 1));
+  const handlePrevDay = () => {
+    const d = Math.max(31, selectedDay - 1);
+    setSelectedDay(d);
+    saveExtProgress({ ...extProgress, lastDay: d });
+    setExtProgress(p => ({ ...p, lastDay: d }));
+  };
+  const handleNextDay = () => {
+    const d = Math.min(210, selectedDay + 1);
+    setSelectedDay(d);
+    saveExtProgress({ ...extProgress, lastDay: d });
+    setExtProgress(p => ({ ...p, lastDay: d }));
+  };
+
+  const isExtDayCompleted = extProgress.completedDays.includes(selectedDay);
+  const extCompletedCount = extProgress.completedDays.length;
+
+  const handleToggleExtDay = () => {
+    let newDays;
+    if (isExtDayCompleted) {
+      newDays = extProgress.completedDays.filter(d => d !== selectedDay);
+    } else {
+      newDays = [...extProgress.completedDays, selectedDay];
+    }
+    const nextDay = isExtDayCompleted ? selectedDay : Math.min(selectedDay + 1, 210);
+    const updated = { completedDays: newDays, lastDay: nextDay };
+    saveExtProgress(updated);
+    setExtProgress(updated);
+    if (!isExtDayCompleted) setSelectedDay(nextDay);
+  };
 
   if (isLocked) {
     return (
@@ -73,10 +111,10 @@ const ExtendedProtocol = () => {
                 <p className="text-[10px] text-gray-400">{content.phase.months}</p>
               </div>
             </div>
-            <span className="text-xs font-bold text-gray-500">{overallProgress}/180</span>
+            <span className="text-xs font-bold text-gray-500">{extCompletedCount}/180</span>
           </div>
           <div className="w-full bg-white/10 rounded-full h-2 overflow-hidden">
-            <div className="bg-gradient-to-r from-[#D4874D] to-[#E8A035] h-full rounded-full transition-all duration-700" style={{ width: `${(overallProgress / 180) * 100}%` }} />
+            <div className="bg-gradient-to-r from-[#D4874D] to-[#E8A035] h-full rounded-full transition-all duration-700" style={{ width: `${(extCompletedCount / 180) * 100}%` }} />
           </div>
           <p className="text-xs text-gray-400 mt-3 leading-relaxed">{content.phase.desc}</p>
         </div>
@@ -93,8 +131,8 @@ const ExtendedProtocol = () => {
             {EXTENDED_PHASES.map((phase, i) => {
               const phaseStart = [30, 60, 90, 120, 150, 180][i];
               const phaseEnd = [60, 90, 120, 150, 180, 210][i];
-              const isActive = overallProgress >= (phaseStart - 30) && overallProgress < (phaseEnd - 30);
-              const isDone = overallProgress >= (phaseEnd - 30);
+              const isActive = extCompletedCount >= (phaseStart - 30) && extCompletedCount < (phaseEnd - 30);
+              const isDone = extCompletedCount >= (phaseEnd - 30);
               return (
                 <div key={i} className={`flex items-center space-x-3 p-3 rounded-xl border ${isActive ? 'border-[#D4874D]/30 bg-[#FEF0E4]/30' : isDone ? 'border-[#6B3FA0]/20 bg-[#F0ECF9]/30' : 'border-gray-100 bg-gray-50'}`}>
                   <span className="text-lg">{phase.icon}</span>
@@ -117,7 +155,10 @@ const ExtendedProtocol = () => {
           <ChevronLeft size={20} className="text-gray-600" />
         </button>
         <div className="text-center">
-          <span className="text-2xl font-black text-gray-900">Day {selectedDay}</span>
+          <div className="flex items-center justify-center space-x-2">
+            <span className="text-2xl font-black text-gray-900">Day {selectedDay}</span>
+            {isExtDayCompleted && <Check size={18} className="text-[#D4874D]" strokeWidth={3} />}
+          </div>
           <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">{content.phase.name}</p>
         </div>
         <button onClick={handleNextDay} disabled={selectedDay >= 210} className="p-2 rounded-full hover:bg-gray-100 disabled:opacity-30 transition-colors">
@@ -170,7 +211,7 @@ const ExtendedProtocol = () => {
       </div>
 
       {/* Wellness Challenge */}
-      <div className="bg-gradient-to-r from-[#F0ECF9] to-[#FEF0E4] rounded-2xl p-5 border border-[#6B3FA0]/10">
+      <div className="bg-gradient-to-r from-[#F0ECF9] to-[#FEF0E4] rounded-2xl p-5 mb-5 border border-[#6B3FA0]/10">
         <div className="flex items-center space-x-2 mb-3">
           <Target size={18} className="text-[#6B3FA0]" />
           <h3 className="font-bold text-gray-900 text-sm">Today's Challenge</h3>
@@ -185,6 +226,19 @@ const ExtendedProtocol = () => {
           </div>
         </div>
       </div>
+
+      {/* Mark Day Complete */}
+      <button
+        onClick={handleToggleExtDay}
+        className={`w-full py-4 rounded-xl flex items-center justify-center space-x-2 font-semibold transition-all ${
+          isExtDayCompleted
+            ? 'bg-[#FEF0E4] text-[#D4874D] border border-[#D4874D]/20'
+            : 'bg-[#D4874D] text-white shadow-lg shadow-[#D4874D]/20 hover:bg-[#C07840]'
+        }`}
+      >
+        {isExtDayCompleted ? <CheckCircle2 size={20} /> : <Circle size={20} />}
+        <span>{isExtDayCompleted ? `Day ${selectedDay} Completed ✓` : `Mark Day ${selectedDay} as Done`}</span>
+      </button>
     </div>
   );
 };
