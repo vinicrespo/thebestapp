@@ -255,6 +255,27 @@ const Dashboard = () => {
         </div>
       )}
 
+      {/* Extended Protocol CTA — shows after completing 30 days */}
+      {completedCount >= 30 && (
+        <button
+          onClick={() => navigate('/extended')}
+          className="w-full bg-gradient-to-r from-[#2D2D2D] to-[#1a1a1a] rounded-2xl p-5 mb-5 text-left relative overflow-hidden border border-gray-800"
+        >
+          <div className="absolute top-0 right-0 w-40 h-40 bg-[#D4874D] rounded-full blur-3xl opacity-15 -mr-10 -mt-10" />
+          <div className="relative z-10">
+            <div className="flex items-center space-x-2 mb-2">
+              <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4874D] bg-[#D4874D]/10 px-2 py-0.5 rounded-full">You unlocked this</span>
+            </div>
+            <h3 className="font-bold text-white text-base mb-1">Continue with the 180-Day Protocol</h3>
+            <p className="text-[11px] text-gray-400 leading-relaxed mb-3">You completed your 30 days — don't stop now. The Extended Protocol has 180 days of new shots, recipes, and challenges. Most results appear in months 2-3.</p>
+            <div className="flex items-center space-x-1.5 text-xs font-bold text-[#D4874D]">
+              <span>Start Extended Protocol</span>
+              <ArrowRight size={13} />
+            </div>
+          </div>
+        </button>
+      )}
+
       {/* START HERE — Getting Started Card */}
       <div className="bg-gradient-to-br from-[#6B3FA0] to-[#4A2580] rounded-2xl p-5 mb-5 text-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-40 h-40 bg-white rounded-full blur-3xl opacity-5 -mr-10 -mt-10" />
