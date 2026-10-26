@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration, getUnits, setUnits, convertRecipeUnits } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck, LayoutGrid } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -101,7 +101,7 @@ const Dashboard = () => {
     },
   ];
 
-  const visibleUpdates = APP_UPDATES.filter(u => !dismissedUpdates.includes(u.id));
+  const latestUpdate = !dismissedUpdates.includes(APP_UPDATES[0].id) ? APP_UPDATES[0] : null;
 
   const dismissUpdate = (id) => {
     const next = [...dismissedUpdates, id];
@@ -208,38 +208,49 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* What's New */}
-      {visibleUpdates.length > 0 && (
+      {/* All Features Button */}
+      <button
+        onClick={() => navigate('/features')}
+        className="w-full flex items-center justify-between bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-5 hover:shadow-md transition-all"
+      >
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-[#F0ECF9] rounded-xl flex items-center justify-center">
+            <LayoutGrid size={20} className="text-[#6B3FA0]" />
+          </div>
+          <div className="text-left">
+            <p className="text-sm font-bold text-gray-900">All Features</p>
+            <p className="text-[11px] text-gray-500">Explore everything in your app</p>
+          </div>
+        </div>
+        <ArrowRight size={16} className="text-gray-400" />
+      </button>
+
+      {/* What's New — latest only */}
+      {latestUpdate && (
         <div className="mb-5">
-          <h3 className="font-bold text-gray-900 text-sm mb-3 flex items-center">
-            <Megaphone size={16} className="text-[#6B3FA0] mr-2" /> What's New
-          </h3>
-          <div className="space-y-3">
-            {visibleUpdates.map(update => (
-              <div key={update.id} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#6B3FA0] to-[#D4874D]" />
-                <div className="pl-3">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
-                      <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${update.tagColor}`}>{update.tag}</span>
-                      <span className="text-[10px] text-gray-400 font-medium">{update.date}</span>
-                    </div>
-                    <button onClick={() => dismissUpdate(update.id)} className="p-1 rounded-full hover:bg-gray-100 transition-all">
-                      <X size={14} className="text-gray-300" />
-                    </button>
-                  </div>
-                  <h4 className="font-bold text-gray-900 text-sm mb-1">{update.title}</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed mb-3">{update.desc}</p>
-                  <button
-                    onClick={update.action}
-                    className="flex items-center space-x-1.5 text-xs font-bold text-[#6B3FA0] hover:text-[#5A2E8E] transition-colors"
-                  >
-                    <span>{update.actionLabel}</span>
-                    <ArrowRight size={13} />
-                  </button>
+          <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-[#6B3FA0] to-[#D4874D]" />
+            <div className="pl-3">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center space-x-2">
+                  <Megaphone size={13} className="text-[#6B3FA0]" />
+                  <span className={`text-[9px] font-bold uppercase tracking-widest px-2 py-0.5 rounded-full ${latestUpdate.tagColor}`}>{latestUpdate.tag}</span>
+                  <span className="text-[10px] text-gray-400 font-medium">{latestUpdate.date}</span>
                 </div>
+                <button onClick={() => dismissUpdate(latestUpdate.id)} className="p-1 rounded-full hover:bg-gray-100 transition-all">
+                  <X size={14} className="text-gray-300" />
+                </button>
               </div>
-            ))}
+              <h4 className="font-bold text-gray-900 text-sm mb-1">{latestUpdate.title}</h4>
+              <p className="text-xs text-gray-500 leading-relaxed mb-3">{latestUpdate.desc}</p>
+              <button
+                onClick={latestUpdate.action}
+                className="flex items-center space-x-1.5 text-xs font-bold text-[#6B3FA0] hover:text-[#5A2E8E] transition-colors"
+              >
+                <span>{latestUpdate.actionLabel}</span>
+                <ArrowRight size={13} />
+              </button>
+            </div>
           </div>
         </div>
       )}
