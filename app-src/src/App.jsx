@@ -13,6 +13,7 @@ import ShoppingList from './components/Extras/ShoppingList';
 import BonusRecipes from './components/Extras/BonusRecipes';
 import SleepGuide from './components/Extras/SleepGuide';
 import Journal from './components/Extras/Journal';
+import DiagnosticQuiz from './components/Extras/DiagnosticQuiz';
 import BottomNav from './components/Layout/BottomNav';
 import ChatBot from './components/ChatBot';
 import { getProfile } from './utils/storage';
@@ -58,6 +59,7 @@ const App = () => {
                 <Route path="/recipes" element={<BonusRecipes />} />
                 <Route path="/sleep" element={<SleepGuide />} />
                 <Route path="/journal" element={<Journal />} />
+                <Route path="/diagnostic" element={<DiagnosticQuiz />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </>
             )}

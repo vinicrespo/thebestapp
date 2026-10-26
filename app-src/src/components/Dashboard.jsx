@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration, getUnits, setUnits, convertRecipeUnits } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -78,6 +78,17 @@ const Dashboard = () => {
   const greeting = hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening';
 
   const APP_UPDATES = [
+    {
+      id: 'diagnostic-quiz',
+      date: 'Oct 26',
+      tag: 'NEW',
+      tagColor: 'bg-purple-100 text-purple-700',
+      title: 'Results Diagnostic Quiz',
+      desc: 'Completed 30 days without the results you expected? This diagnostic identifies exactly what went wrong and how to fix it.',
+      action: () => navigate('/diagnostic'),
+      actionLabel: 'Take the Quiz',
+      icon: <ClipboardCheck size={16} className="text-purple-600" />,
+    },
     {
       id: 'extended-180',
       date: 'Oct 19',
