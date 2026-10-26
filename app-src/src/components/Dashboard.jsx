@@ -218,8 +218,8 @@ const Dashboard = () => {
             <LayoutGrid size={20} className="text-[#6B3FA0]" />
           </div>
           <div className="text-left">
-            <p className="text-sm font-bold text-gray-900">All Features</p>
-            <p className="text-[11px] text-gray-500">Explore everything in your app</p>
+            <p className="text-sm font-bold text-gray-900">Tools & Extras</p>
+            <p className="text-[11px] text-gray-500">Diagnostic, recipes, journal & more</p>
           </div>
         </div>
         <ArrowRight size={16} className="text-gray-400" />
