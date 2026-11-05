@@ -14,6 +14,7 @@ import BonusRecipes from './components/Extras/BonusRecipes';
 import SleepGuide from './components/Extras/SleepGuide';
 import Journal from './components/Extras/Journal';
 import DiagnosticQuiz from './components/Extras/DiagnosticQuiz';
+import WeeklyChallenge from './components/Extras/WeeklyChallenge';
 import FeaturesList from './components/FeaturesList';
 import BottomNav from './components/Layout/BottomNav';
 import ChatBot from './components/ChatBot';
@@ -61,6 +62,7 @@ const App = () => {
                 <Route path="/sleep" element={<SleepGuide />} />
                 <Route path="/journal" element={<Journal />} />
                 <Route path="/diagnostic" element={<DiagnosticQuiz />} />
+                <Route path="/challenge" element={<WeeklyChallenge />} />
                 <Route path="/features" element={<FeaturesList />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </>

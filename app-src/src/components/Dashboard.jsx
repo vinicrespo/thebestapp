@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration, getUnits, setUnits, convertRecipeUnits } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck, LayoutGrid } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck, LayoutGrid, Trophy } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -79,25 +79,15 @@ const Dashboard = () => {
 
   const APP_UPDATES = [
     {
-      id: 'diagnostic-quiz',
-      date: 'Oct 26',
+      id: 'weekly-challenge',
+      date: 'Nov 5',
       tag: 'NEW',
-      tagColor: 'bg-purple-100 text-purple-700',
-      title: 'Results Diagnostic Quiz',
-      desc: 'Completed 30 days without the results you expected? This diagnostic identifies exactly what went wrong and how to fix it.',
-      action: () => navigate('/diagnostic'),
-      actionLabel: 'Take the Quiz',
-      icon: <ClipboardCheck size={16} className="text-purple-600" />,
-    },
-    {
-      id: 'extended-180',
-      date: 'Oct 19',
-      tag: 'NEW',
-      tagColor: 'bg-emerald-100 text-emerald-700',
-      title: '180-Day Extended Protocol',
-      desc: 'A full 6-month protocol with daily alkaline shots, recipes, and challenges that never repeat. Your longest transformation journey yet.',
-      action: () => navigate('/extended'),
-      actionLabel: 'Explore Now',
+      tagColor: 'bg-amber-100 text-amber-700',
+      title: 'Weekly Challenges',
+      desc: 'A new challenge every week — sugar detox, hydration, movement, sleep, gut health & more. Build the habits that make the protocol work.',
+      action: () => navigate('/challenge'),
+      actionLabel: 'See This Week\'s Challenge',
+      icon: <Trophy size={16} className="text-amber-600" />,
     },
   ];
 
