@@ -1,9 +1,10 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ArrowRight, Target, ClipboardCheck, Trophy } from 'lucide-react';
+import { ChevronLeft, ArrowRight, Target, ClipboardCheck, Trophy, Camera } from 'lucide-react';
 
 const FEATURES = [
-  { title: 'Weekly Challenge', desc: 'A new challenge every week — build habits that accelerate your results.', path: '/challenge', icon: <Trophy size={20} />, colors: 'bg-amber-50 text-amber-600 border-amber-100', tag: 'NEW' },
+  { title: 'Photo Journal', desc: 'Track your visual transformation with weekly progress photos & side-by-side comparison.', path: '/photos', icon: <Camera size={20} />, colors: 'bg-violet-50 text-violet-600 border-violet-100', tag: 'NEW' },
+  { title: 'Weekly Challenge', desc: 'A new challenge every week — build habits that accelerate your results.', path: '/challenge', icon: <Trophy size={20} />, colors: 'bg-amber-50 text-amber-600 border-amber-100' },
   { title: '180-Day Extended Protocol', desc: 'Daily shots, recipes, and challenges that never repeat — 6 full months.', path: '/extended', icon: <Target size={20} />, colors: 'bg-[#FEF0E4] text-[#D4874D] border-[#D4874D]/20' },
   { title: 'Results Diagnostic', desc: 'Completed 30 days without results? Find out exactly what went wrong.', path: '/diagnostic', icon: <ClipboardCheck size={20} />, colors: 'bg-purple-50 text-purple-600 border-purple-100' },
 ];

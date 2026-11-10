@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProfile, getProgress, toggleDayCompletion, saveDailyHabits, getHydration, saveHydration, getUnits, setUnits, convertRecipeUnits } from '../utils/storage';
 import { getDailyProtocol, getMotivationalQuote, PHASES, BADGES, DID_YOU_KNOW } from '../utils/protocol';
-import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck, LayoutGrid, Trophy } from 'lucide-react';
+import { CheckCircle2, Circle, Flame, Calendar as CalendarIcon, Check, Droplets, Activity, Heart, ArrowRight, Award, Sparkles, BookOpen, ShoppingCart, Moon, UtensilsCrossed, ChevronDown, ChevronUp, HelpCircle, X, Zap, RefreshCw, Megaphone, ClipboardCheck, LayoutGrid, Trophy, Camera } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Confetti from './Confetti';
 
@@ -79,15 +79,15 @@ const Dashboard = () => {
 
   const APP_UPDATES = [
     {
-      id: 'weekly-challenge',
-      date: 'Nov 5',
+      id: 'photo-journal',
+      date: 'Nov 9',
       tag: 'NEW',
-      tagColor: 'bg-amber-100 text-amber-700',
-      title: 'Weekly Challenges',
-      desc: 'A new challenge every week — sugar detox, hydration, movement, sleep, gut health & more. Build the habits that make the protocol work.',
-      action: () => navigate('/challenge'),
-      actionLabel: 'See This Week\'s Challenge',
-      icon: <Trophy size={16} className="text-amber-600" />,
+      tagColor: 'bg-violet-100 text-violet-700',
+      title: 'Photo Journal',
+      desc: 'Track your visual transformation with progress photos. Take weekly snapshots, compare side by side, and see how far you\'ve come.',
+      action: () => navigate('/photos'),
+      actionLabel: 'Start Your Photo Journal',
+      icon: <Camera size={16} className="text-violet-600" />,
     },
   ];
 
